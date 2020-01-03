@@ -17,7 +17,7 @@ def post_combo():
 
     if 'character' not in data or 'ver' not in data or 'damage' not in data or\
         'cs' not in data or 'ch' not in data or 'starter' not in data or\
-        'meter' not in data:
+        'meter' not in data or 'ms' not in data:
             return bad_request("Fields missing data")
     
     combo = UnibCombos()
