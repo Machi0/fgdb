@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+    <v-toolbar app color="primary" max-height="56" flat>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -35,7 +31,7 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-toolbar>
 
     <v-content>
       <router-view/>
