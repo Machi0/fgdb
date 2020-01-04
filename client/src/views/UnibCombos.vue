@@ -1,12 +1,17 @@
 <template>
-    <v-container>
-        <v-layout text-center>
-            <v-flex>
-                <v-btn @click="p=!p"></v-btn>
-                <br/>
-                <span>{{ p }}</span>
-            </v-flex>
-        </v-layout>
+    <v-container mx-auto my-8>
+        <v-row justify="center">
+            <v-col md="2" sm="2" class="text-center">
+              <v-select v-model="character" :items="characters"
+               label="Character" item-color="secondary"/>
+              <v-checkbox v-model="ch" label="Counter Hit" color="primary"
+               flat/>
+            </v-col>
+            <v-col md="2" sm="2" class="text-center">
+              <v-select v-model="version" :items="versions"
+               label="Version" item-color="secondary"/>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -15,11 +20,22 @@
 export default {
   data() {
     return {
-      p: true,
+      characters: [
+        'Akatsuki',
+        'Byakuya',
+      ],
+      versions: [
+        'ST',
+        'CLR',
+      ],
+      character: '',
+      ch: false,
+      version: '',
     };
   },
   created() {
-    this.$vue.navbar = '#311B92';
+    this.$vuetify.theme.themes.dark.primary = '#512DA8';
+    this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
   },
 };
 </script>
