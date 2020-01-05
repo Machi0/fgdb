@@ -1,15 +1,41 @@
 <template>
-    <v-container mx-auto my-8>
-        <v-row justify="center">
-            <v-col md="2" sm="2" class="text-center">
+    <v-container px-12 my-6>
+        <v-row justify="center" class="mb-n4">
+            <v-col md="4" class="text-center">
               <v-select v-model="character" :items="characters"
-               label="Character" item-color="secondary"/>
-              <v-checkbox v-model="ch" label="Counter Hit" color="primary"
-               flat/>
+              label="Character" item-color="secondary" color="secondary"/>
             </v-col>
-            <v-col md="2" sm="2" class="text-center">
+            <v-col md="3" class="text-center">
+              <v-select v-model="starter" :items="starters"
+              label="Starter" item-color="secondary" color="secondary"/>
+            </v-col>
+            <v-col md="2" class="text-center">
               <v-select v-model="version" :items="versions"
-               label="Version" item-color="secondary"/>
+              label="Version" item-color="secondary" color="secondary"/>
+            </v-col>
+        </v-row>
+        <v-row justify="center" class="mb-n4">
+            <v-col md="2" class="text-center" align="top">
+              <v-select v-model="pos" :items="screenpos"
+              label="Position" item-color="secondary" color="secondary"/>
+            </v-col>
+            <v-col md="4" align-self="end">
+              <v-range-slider v-model="meter" color="secondary"
+              label="Meter" max="200" thumb-label/>
+            </v-col>
+        </v-row>
+        <v-row justify="center">
+            <v-col md="2" class="text-center">
+              <v-row justify="center">
+                <v-checkbox v-model="ch" label="Counter Hit" color="secondary"
+                ripple="false" flat/>
+              </v-row>
+            </v-col>
+            <v-col md="2" class="text-center">
+              <v-row justify="center">
+                <v-checkbox v-model="cs" label="Vorpal" color="secondary"
+                ripple="false" flat/>
+              </v-row>
             </v-col>
         </v-row>
     </v-container>
@@ -21,16 +47,46 @@ export default {
   data() {
     return {
       characters: [
+        'All',
         'Akatsuki',
         'Byakuya',
+        'Carmine',
+        'Chaos',
+        'Eltnum',
+        'Enkidu',
+        'Gordeau',
+        'Hilda',
+        'Hyde',
+        'Linne',
+        'Merkava',
+        'Mika',
+        'Nanase',
+        'Orie',
+        'Phonon',
+        'Seth',
+        'Vatista',
+        'Wagner',
+        'Waldstein',
+        'Yuzuriha',
       ],
       versions: [
         'ST',
         'CLR',
       ],
-      character: '',
+      screenpos: [
+        'Midscreen',
+        'Corner',
+      ],
+      starters: [
+        'All',
+      ],
+      character: 'All',
+      version: 'CLR',
+      pos: 'Midscreen',
+      starter: 'All',
+      meter: [0, 200],
       ch: false,
-      version: '',
+      cs: false,
     };
   },
   created() {
