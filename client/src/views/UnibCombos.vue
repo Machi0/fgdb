@@ -1,6 +1,6 @@
 <template>
-    <v-container px-12 my-6>
-        <v-row justify="center" class="mb-n4">
+    <v-container px-12 mt-2>
+        <v-row justify="center" class="mb-n5">
             <v-col md="4" class="text-center">
               <v-select v-model="character" :items="characters"
               label="Character" item-color="secondary" color="secondary"/>
@@ -14,14 +14,14 @@
               label="Version" item-color="secondary" color="secondary"/>
             </v-col>
         </v-row>
-        <v-row justify="center" class="mb-n4">
+        <v-row justify="center" class="mb-n7">
             <v-col md="2" class="text-center" align="top">
               <v-select v-model="pos" :items="screenpos"
               label="Position" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="4" align-self="end">
               <v-range-slider v-model="meter" color="secondary"
-              label="Meter" max="200" thumb-label/>
+              label="Meter" max="200" step="25" thumb-label/>
             </v-col>
         </v-row>
         <v-row justify="center">
