@@ -3,11 +3,13 @@
 
         <v-row justify="center" class="mb-n5">
             <v-col md="4" class="text-center">
-              <v-select v-model="character" :items="characters"
+              <v-select v-model="character" @change="characterChange()"
+              :items="characters"
               label="Character" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="3" class="text-center">
-              <v-select v-if="character != 'All'" v-model="starter" :items="getCombos()"
+              <v-autocomplete v-if="character != 'All'" v-model="starter"
+              :items="getCombos()"
               label="Starter" item-color="secondary" color="secondary"/>
               <v-select v-else disabled
               label="Starter" item-color="secondary" color="secondary"/>
@@ -43,12 +45,12 @@
               </v-row>
             </v-col>
         </v-row>
-
+    <v-span> {{ this.starter }} </v-span>
     </v-container>
 </template>
 
 <script>
-import unibstarters from '@/components/UnibStarters.json';
+import unibstarters from '@/components/UnibStarters.vue';
 
 export default {
 
@@ -86,12 +88,12 @@ export default {
         'Corner',
       ],
 
-      starters: unibstarters,
+      starters: unibstarters.data(),
 
       character: 'All',
       version: 'ST',
       pos: 'Midscreen',
-      starter: '',
+      starter: 'All',
       meter: [0, 200],
       ch: false,
       cs: false,
@@ -100,8 +102,11 @@ export default {
 
   methods: {
     getCombos() {
-      this.starter = 'All';
       return this.starters[this.version][this.character];
+    },
+
+    characterChange() {
+      this.starter = 'All';
     },
   },
 
