@@ -9,11 +9,11 @@
         </v-hover>
         </v-toolbar-items>
         <div class="mx-4"/>
-        <v-toolbar-items class="mt-3">
+        <v-toolbar-items class="mt-4">
         <v-hover v-slot:default="{ hover }">
             <router-link to="/unib/combos">
             <v-img src="@/assets/453345.png" alt="UNIB Logo" contain
-            width="156" :class="{ 'on-hover': hover }" class="fade"/>
+            width="145" :class="{ 'on-hover': hover }" class="fade"/>
             </router-link>
         </v-hover>
         </v-toolbar-items>

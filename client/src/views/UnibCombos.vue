@@ -1,12 +1,15 @@
 <template>
     <v-container px-12 mt-2>
+
         <v-row justify="center" class="mb-n5">
             <v-col md="4" class="text-center">
               <v-select v-model="character" :items="characters"
               label="Character" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="3" class="text-center">
-              <v-select v-model="starter" :items="starters"
+              <v-select v-if="character != 'All'" v-model="starter" :items="getCombos()"
+              label="Starter" item-color="secondary" color="secondary"/>
+              <v-select v-else disabled
               label="Starter" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="2" class="text-center">
@@ -14,6 +17,7 @@
               label="Version" item-color="secondary" color="secondary"/>
             </v-col>
         </v-row>
+
         <v-row justify="center" class="mb-n7">
             <v-col md="2" class="text-center" align="top">
               <v-select v-model="pos" :items="screenpos"
@@ -24,6 +28,7 @@
               label="Meter" max="200" step="25" thumb-label/>
             </v-col>
         </v-row>
+
         <v-row justify="center">
             <v-col md="2" class="text-center">
               <v-row justify="center">
@@ -38,12 +43,15 @@
               </v-row>
             </v-col>
         </v-row>
+
     </v-container>
 </template>
 
 <script>
+import unibstarters from '@/components/UnibStarters.json';
 
 export default {
+
   data() {
     return {
       characters: [
@@ -77,18 +85,26 @@ export default {
         'Midscreen',
         'Corner',
       ],
-      starters: [
-        'All',
-      ],
+
+      starters: unibstarters,
+
       character: 'All',
-      version: 'CLR',
+      version: 'ST',
       pos: 'Midscreen',
-      starter: 'All',
+      starter: '',
       meter: [0, 200],
       ch: false,
       cs: false,
     };
   },
+
+  methods: {
+    getCombos() {
+      this.starter = 'All';
+      return this.starters[this.version][this.character];
+    },
+  },
+
   created() {
     this.$vuetify.theme.themes.dark.primary = '#512DA8';
     this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
