@@ -45,7 +45,6 @@
               </v-row>
             </v-col>
         </v-row>
-    <v-span> {{ this.starter }} </v-span>
     </v-container>
 </template>
 
