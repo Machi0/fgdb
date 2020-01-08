@@ -1,9 +1,9 @@
 <template>
-    <v-container px-12 mt-2>
+    <v-container px-12 mt-1>
 
         <v-row justify="center" class="mb-n5">
             <v-col md="4" class="text-center">
-              <v-select v-model="character" @change="characterChange()"
+              <v-autocomplete v-model="character" @change="characterChange()"
               :items="characters"
               label="Character" item-color="secondary" color="secondary"/>
             </v-col>
@@ -110,7 +110,7 @@ export default {
   },
 
   created() {
-    this.$vuetify.theme.themes.dark.primary = '#512DA8';
+    this.$vuetify.theme.themes.dark.primary = '#5E35B1';
     this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
   },
 };
