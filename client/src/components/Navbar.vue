@@ -1,10 +1,10 @@
 <template>
-    <v-toolbar app color="primary" max-height="50" flat>
+    <v-toolbar app color="primary" max-height="45" flat>
         <v-toolbar-items>
         <v-hover v-slot:default="{ hover }">
             <router-link to="/">
             <v-img src="@/assets/53454.png" alt="FGDB Logo" contain
-            width="49" :class="{ 'on-hover': hover }" class="ml-4"/>
+            width="45" :class="{ 'on-hover': hover }" class="ml-4"/>
             </router-link>
         </v-hover>
         </v-toolbar-items>
@@ -13,7 +13,7 @@
         <v-hover v-slot:default="{ hover }">
             <router-link to="/unib/combos">
             <v-img src="@/assets/453345.png" alt="UNIB Logo" contain
-            width="145" :class="{ 'on-hover': hover }" class="fade"/>
+            width="130" :class="{ 'on-hover': hover }" class="fade"/>
             </router-link>
         </v-hover>
         </v-toolbar-items>
