@@ -1,10 +1,10 @@
 <template>
     <v-container px-12>
 
-        <v-row justify="center" class="mb-n6">
+        <v-row justify="center" class="mb-n4">
             <v-col md="4" class="text-center">
               <v-autocomplete v-model="character" @change="characterChange()"
-              :items="characters"
+              :items="getCharacters()"
               label="Character" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="3" class="text-center">
@@ -20,33 +20,17 @@
             </v-col>
         </v-row>
 
-        <v-row justify="center" class="mb-n6">
-            <v-col md="2" class="text-center" align="top">
-              <v-select v-model="workson" :items="setWorksOn()" multiple
-              label="Works On" item-color="secondary" color="secondary">
-                <template v-slot:prepend-item>
-                  <v-list-item ripple @click="allCharsToggle()">
-                    <v-list-item-action>
-                      <v-icon :color="allChars() ? 'secondary' : ''">{{ checkIcon }}</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                      <v-list-item-title> All </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-divider/>
-                </template>
-              </v-select>
-            </v-col>
-            <v-col md="2" class="text-center" align="top">
-              <v-select v-model="pos" :items="screenpos"
-              label="Position" item-color="secondary" color="secondary"/>
+        <v-row justify="center" class="mb-n8">
+            <v-col md="5" align-self="end">
+              <v-range-slider v-model="meter" color="secondary"
+              label="Meter" max="200" step="25" thumb-label/>
             </v-col>
         </v-row>
 
         <v-row justify="center">
-            <v-col md="5" align-self="end">
-              <v-range-slider v-model="meter" color="secondary"
-              label="Meter" max="200" step="25" thumb-label/>
+            <v-col md="2" class="text-center" align="top">
+              <v-select v-model="pos" :items="screenpos"
+              label="Position" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="2" class="text-center">
               <v-row justify="center">
@@ -61,7 +45,43 @@
               </v-row>
             </v-col>
         </v-row>
-        {{ this.workson }}
+
+        <v-row v-if="character=='Eltnum'" justify="center">
+            <v-col md="1">
+              <v-text-field v-model="eltnum.bullets" color="secondary"
+              label="Bullets" :rules="[rules.required, rules.limit]"
+              maxlength="2" dense/>
+            </v-col>
+            <v-col md="1">
+              <v-text-field v-model="eltnum.enh" color="secondary"
+              label="Enhanced" :rules="[rules.required, rules.limit]"
+              maxlength="2" dense/>
+            </v-col>
+        </v-row>
+
+        <v-row v-if="character=='Wagner'" justify="center" class="mt-n6">
+          <v-col md="2" class="text-center">
+            <v-row justify="center">
+              <v-checkbox v-model="wagner.sw" label="Sword Install" color="secondary"
+              ripple="false" flat/>
+            </v-row>
+          </v-col>
+          <v-col md="2" class="text-center">
+            <v-row justify="center">
+              <v-checkbox v-model="wagner.sh" label="Shield Install" color="secondary"
+              ripple="false" flat/>
+            </v-row>
+          </v-col>
+        </v-row>
+
+        <v-row v-if="character=='Chaos'" justify="center" class="mt-n6">
+          <v-col md="2" class="text-center">
+            <v-row justify="center">
+              <v-checkbox v-model="chaos.azhi" label="Azhi" color="secondary"
+              ripple="false" flat/>
+            </v-row>
+          </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -72,29 +92,57 @@ export default {
 
   data() {
     return {
-      characters: [
-        'All',
-        'Akatsuki',
-        'Byakuya',
-        'Carmine',
-        'Chaos',
-        'Eltnum',
-        'Enkidu',
-        'Gordeau',
-        'Hilda',
-        'Hyde',
-        'Linne',
-        'Merkava',
-        'Mika',
-        'Nanase',
-        'Orie',
-        'Phonon',
-        'Seth',
-        'Vatista',
-        'Wagner',
-        'Waldstein',
-        'Yuzuriha',
-      ],
+      characters: {
+        ST: [
+          'All',
+          'Akatsuki',
+          'Byakuya',
+          'Carmine',
+          'Chaos',
+          'Eltnum',
+          'Enkidu',
+          'Gordeau',
+          'Hilda',
+          'Hyde',
+          'Linne',
+          'Merkava',
+          'Mika',
+          'Nanase',
+          'Orie',
+          'Phonon',
+          'Seth',
+          'Vatista',
+          'Wagner',
+          'Waldstein',
+          'Yuzuriha',
+        ],
+
+        CLR: [
+          'All',
+          'Akatsuki',
+          'Byakuya',
+          'Carmine',
+          'Chaos',
+          'Eltnum',
+          'Enkidu',
+          'Gordeau',
+          'Hilda',
+          'Hyde',
+          'Linne',
+          'Londrekia',
+          'Merkava',
+          'Mika',
+          'Nanase',
+          'Orie',
+          'Phonon',
+          'Seth',
+          'Vatista',
+          'Wagner',
+          'Waldstein',
+          'Yuzuriha',
+
+        ],
+      },
       versions: [
         'ST',
         'CLR',
@@ -108,24 +156,31 @@ export default {
 
       character: 'All',
       version: 'ST',
-      workson: [],
       pos: 'Midscreen',
       starter: 'All',
       meter: [0, 200],
       ch: false,
       cs: false,
+
+      eltnum: {
+        bullets: 13,
+        enh: 13,
+      },
+
+      wagner: {
+        sw: true,
+        sh: true,
+      },
+
+      chaos: {
+        azhi: true,
+      },
+
+      rules: {
+        required: value => !!value || 'Required',
+        limit: value => (value >= 0 && value <= 13) || '0-13',
+      },
     };
-  },
-
-  computed: {
-    allCharsIcon() {
-      return this.workson.length === this.characters.length - 1;
-    },
-
-    checkIcon() {
-      if (this.allCharsIcon) return 'mdi-checkbox-marked';
-      return 'mdi-checkbox-blank-outline';
-    },
   },
 
   methods: {
@@ -133,26 +188,15 @@ export default {
       return this.starters[this.version][this.character];
     },
 
+    getCharacters() {
+      if (this.version === 'CLR') {
+        return this.characters.CLR;
+      }
+      return this.characters.ST;
+    },
+
     characterChange() {
       this.starter = 'All';
-    },
-
-    setWorksOn() {
-      return this.characters.slice(1);
-    },
-
-    allChars() {
-      return this.workson.length === this.characters.length - 1;
-    },
-
-    allCharsToggle() {
-      this.$nextTick(() => {
-        if (this.allChars()) {
-          this.workson = [];
-        } else {
-          this.workson = this.characters.slice(1);
-        }
-      });
     },
   },
 
