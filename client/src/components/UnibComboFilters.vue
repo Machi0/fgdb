@@ -46,7 +46,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="character=='Eltnum'" justify="center">
+        <v-row v-if="character=='Eltnum'" justify="center" class="mt-n1">
             <v-col md="1">
               <v-text-field v-model="eltnum.bullets" color="secondary"
               label="Bullets" :rules="[rules.required, rules.limit]"
@@ -82,14 +82,21 @@
             </v-row>
           </v-col>
         </v-row>
+
+        <unibcombopost/>
     </v-container>
 </template>
 
 <script>
 import unibstarters from '@/components/UnibStarters.vue';
+import unibcombopost from '@/components/UnibComboPost.vue';
 
 export default {
   name: 'unibfilters',
+
+  components: {
+    unibcombopost,
+  },
 
   data() {
     return {
