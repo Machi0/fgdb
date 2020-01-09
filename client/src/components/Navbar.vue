@@ -4,7 +4,7 @@
         <v-hover v-slot:default="{ hover }">
             <router-link to="/">
             <v-img src="@/assets/53454.png" alt="FGDB Logo" contain
-            width="45" :class="{ 'on-hover': hover }" class="ml-4"/>
+            width="43" :class="{ 'on-hover': hover }" class="ml-4"/>
             </router-link>
         </v-hover>
         </v-toolbar-items>
