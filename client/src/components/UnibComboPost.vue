@@ -3,16 +3,28 @@
         <v-row justify="center">
             <v-dialog v-model="post" persistent max-width="200">
                 <template v-slot:activator="{ on }">
-                    <v-btn color="primary" v-on="on">mdi-domain</v-btn>
+                    <v-icon color="secondary" v-on="on">mdi-plus-box</v-icon>
                 </template>
                 <v-card>
                     <v-card-title>
-                        Website
+                        Upload
+                        <v-spacer/>
+                        <v-icon @click="post=!post" small color="error">
+                            mdi-close
+                        </v-icon>
                     </v-card-title>
                     <v-card-text>
-                        <v-row>
-                            <v-btn @click="post=!post"/>
-                            {{ characters.ST }}
+                        <v-row class="text-center">
+                            <v-col>
+                                <v-icon color="blue" size="45">
+                                    mdi-twitter
+                                </v-icon>
+                            </v-col>
+                            <v-col>
+                                <v-icon color="red darken-1" size="45">
+                                    mdi-youtube
+                                </v-icon>
+                            </v-col>
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -30,6 +42,9 @@ export default {
   data() {
     return {
       post: false,
+      yt: false,
+      tw: false,
+
       characters: unibfilters.data().characters,
     };
   },
