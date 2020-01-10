@@ -2,7 +2,7 @@
     <v-container px-12>
 
         <v-row justify="center" class="mb-n4">
-            <v-col md="4" class="text-center">
+            <v-col cols="12" md="4" sm="4" class="text-center mb-n6">
               <v-autocomplete v-model="character" @change="characterChange()"
               :items="getCharacters()"
               label="Character" item-color="secondary" color="secondary"/>
@@ -28,25 +28,25 @@
         </v-row>
 
         <v-row justify="center">
-            <v-col md="2" class="text-center" align="top">
+            <v-col cols="6" md="2" sm="4" class="text-center mb-n7" align="top">
               <v-select v-model="pos" :items="screenpos"
               label="Position" item-color="secondary" color="secondary"/>
             </v-col>
-            <v-col md="2" class="text-center">
-              <v-row justify="center">
-                <v-checkbox v-model="ch" label="Counter Hit" color="secondary"
-                ripple="false" flat/>
-              </v-row>
-            </v-col>
-            <v-col md="2" class="text-center">
+            <v-col cols="6" md="2" sm="4" class="text-center mb-n7">
               <v-row justify="center">
                 <v-checkbox v-model="cs" label="Vorpal" color="secondary"
                 ripple="false" flat/>
               </v-row>
             </v-col>
+            <v-col md="2" class="text-center mb-n8">
+              <v-row justify="center">
+                <v-checkbox v-model="ch" label="Counter Hit" color="secondary"
+                ripple="false" flat/>
+              </v-row>
+            </v-col>
         </v-row>
 
-        <v-row v-if="character=='Eltnum'" justify="center" class="mt-n1">
+        <v-row v-if="character=='Eltnum'" justify="center" class="mt-6">
             <v-col md="1">
               <v-text-field v-model="eltnum.bullets" color="secondary"
               label="Bullets" :rules="[rules.required, rules.limit]"
@@ -59,7 +59,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="character=='Wagner'" justify="center" class="mt-n6">
+        <v-row v-if="character=='Wagner'" justify="center">
           <v-col md="2" class="text-center">
             <v-row justify="center">
               <v-checkbox v-model="wagner.sw" label="Sword Install" color="secondary"
@@ -74,7 +74,7 @@
           </v-col>
         </v-row>
 
-        <v-row v-if="character=='Chaos'" justify="center" class="mt-n6">
+        <v-row v-if="character=='Chaos'" justify="center">
           <v-col md="2" class="text-center">
             <v-row justify="center">
               <v-checkbox v-model="chaos.azhi" label="Azhi" color="secondary"

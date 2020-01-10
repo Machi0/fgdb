@@ -13,5 +13,9 @@ export default {
   components: {
     HelloWorld,
   },
+
+  created() {
+    this.$vuetify.theme.themes.dark.primary = '#3949AB';
+  },
 };
 </script>
