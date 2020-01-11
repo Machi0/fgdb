@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 venv/
-.vscode/
 
 .DS_Store
 node_modules
