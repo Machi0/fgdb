@@ -1,6 +1,6 @@
 <template>
   <div>
-    <unibfilters/>
+    <unibfilters />
   </div>
 </template>
 
@@ -13,8 +13,7 @@ export default {
   },
 
   data() {
-    return {
-    };
+    return {};
   },
 
   created() {

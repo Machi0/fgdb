@@ -488,9 +488,7 @@ export default {
         ],
       },
 
-      CLR: {
-
-      },
+      CLR: {},
     };
   },
 };
