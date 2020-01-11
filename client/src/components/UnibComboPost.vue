@@ -88,7 +88,7 @@ export default {
         required: value => !!value || 'Required Field',
 
         // prettier-ignore
-        twcheck: value => value.includes('twitter.com') || value.includes('http://t.co') || 'Invalid Twitter URL',
+        twcheck: value => value.includes('twitter.com') || value.includes('http://t.co') || 'Invalid Twitter URL'
       },
     };
   },

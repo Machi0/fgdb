@@ -40,10 +40,14 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "@vue/airbnb"
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "prettier"
     ],
     "rules": {
-      "linebreak-style": 0
+      "linebreak-style": 0,
+      "prettier/prettier": "error"
     },
     "parserOptions": {
       "parser": "babel-eslint"
@@ -52,5 +56,11 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
+  ],
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    }
   ]
 }
