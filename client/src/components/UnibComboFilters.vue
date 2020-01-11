@@ -4,12 +4,12 @@
         <v-row justify="center" class="mb-n4">
             <v-col cols="12" md="4" sm="4" xl="3" class="text-center mb-n6">
               <v-autocomplete v-model="character" @change="characterChange()"
-              :items="getCharacters()"
+              :items="getCharacters()" spellcheck="false"
               label="Character" item-color="secondary" color="secondary"/>
             </v-col>
             <v-col md="3" xl="2" class="text-center">
               <v-autocomplete v-if="character != 'All'" v-model="starter"
-              :items="getStarters()"
+              :items="getStarters()" spellcheck="false"
               label="Starter" item-color="secondary" color="secondary"/>
               <v-select v-else disabled
               label="Starter" item-color="secondary" color="secondary"/>

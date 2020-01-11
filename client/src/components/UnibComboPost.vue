@@ -6,7 +6,8 @@
                     <v-row class="text-center" justify="center">
                         <v-col v-if="tw===true">
                             <v-text-field v-model="twlink" color="secondary" maxlength="200"
-                            label="URL" :rules="[rules.required, rules.twcheck]"/>
+                            label="URL" :rules="[rules.required, rules.twcheck]"
+                            spellcheck="false"/>
                         </v-col>
                     </v-row>
 
@@ -19,7 +20,8 @@
                         <v-col>
                             <v-autocomplete v-model="character" @change="characterChange()"
                             :items="characters[version].slice(1)" :rules="[rules.required]"
-                            label="Character" item-color="secondary" color="secondary"/>
+                            label="Character" item-color="secondary" color="secondary"
+                            spellcheck="false"/>
                         </v-col>
                     </v-row>
 
@@ -27,7 +29,8 @@
                         <v-col>
                             <v-autocomplete v-model="starter"
                             :items="getStarters()" :rules="[rules.required]"
-                            label="Starter" item-color="secondary" color="secondary"/>
+                            label="Starter" item-color="secondary"
+                            spellcheck="false" color="secondary"/>
                         </v-col>
                     </v-row>
                 </v-form>
@@ -62,7 +65,7 @@ export default {
 
       rules: {
         required: value => !!value || 'Required Field',
-        twcheck: value => value.includes('twitter.com') || 'Invalid Twitter URL',
+        twcheck: value => (value.includes('twitter.com') || value.includes('http://t.co')) || 'Invalid Twitter URL',
       },
     };
   },
