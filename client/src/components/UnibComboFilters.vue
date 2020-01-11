@@ -9,7 +9,7 @@
             </v-col>
             <v-col md="3" xl="2" class="text-center">
               <v-autocomplete v-if="character != 'All'" v-model="starter"
-              :items="getCombos()"
+              :items="getStarters()"
               label="Starter" item-color="secondary" color="secondary"/>
               <v-select v-else disabled
               label="Starter" item-color="secondary" color="secondary"/>
@@ -194,7 +194,7 @@ export default {
   },
 
   methods: {
-    getCombos() {
+    getStarters() {
       return this.starters[this.version][this.character];
     },
 

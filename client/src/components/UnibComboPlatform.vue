@@ -20,7 +20,7 @@
                                     <v-dialog v-model="tw" max-width="600"
                                     transition="fade-transition" persistent>
                                         <template v-slot:activator="{ on }">
-                                            <v-icon color="blue"
+                                            <v-icon color="blue" class="mr-3"
                                             @click="tw=!tw, post=!post" size="45">
                                                 mdi-twitter
                                             </v-icon>
