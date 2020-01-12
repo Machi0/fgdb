@@ -2,7 +2,7 @@
   <div>
     <v-card-text class="mt-n6">
       <v-container>
-        <v-form>
+        <v-form ref="form">
           <v-row class="text-center" justify="center">
             <v-col v-if="tw === true">
               <v-text-field
@@ -12,6 +12,7 @@
                 label="URL"
                 :rules="[rules.required, rules.twcheck]"
                 spellcheck="false"
+                validate-on-blur
               />
             </v-col>
 
@@ -23,6 +24,7 @@
                 label="URL"
                 :rules="[rules.required, rules.ytcheck]"
                 spellcheck="false"
+                validate-on-blur
               />
             </v-col>
           </v-row>
@@ -155,6 +157,19 @@
               </v-text-field>
             </v-col>
           </v-row>
+
+          <v-row justify="center">
+            <v-btn
+              color="primary"
+              class="self-text-center"
+              depressed="true"
+              tile
+              :ripple="false"
+              @click="$emit('close')"
+            >
+              Submit
+            </v-btn>
+          </v-row>
         </v-form>
       </v-container>
     </v-card-text>
@@ -212,6 +227,10 @@ export default {
       }
 
       return this.starters[this.version][this.character].slice(1);
+    },
+
+    reset: function() {
+      this.$refs.form.reset();
     },
   },
 };

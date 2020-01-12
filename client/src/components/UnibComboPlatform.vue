@@ -37,7 +37,7 @@
                           mdi-close
                         </v-icon>
                       </v-card-title>
-                      <unibcombopost tw />
+                      <unibcombopost tw @close="tw = !tw" />
                     </v-card>
                   </v-dialog>
                 </v-col>
