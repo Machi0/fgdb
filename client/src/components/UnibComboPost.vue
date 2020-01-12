@@ -2,7 +2,7 @@
   <div>
     <v-card-text class="mt-n6">
       <v-container>
-        <v-form ref="form">
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-row class="text-center" justify="center">
             <v-col v-if="tw === true">
               <v-text-field
@@ -25,6 +25,7 @@
                 :rules="[rules.required, rules.ytcheck]"
                 spellcheck="false"
                 validate-on-blur
+                hint="Please add timestamp if necessary"
               />
             </v-col>
           </v-row>
@@ -85,7 +86,7 @@
                 v-model="eltnum.enh"
                 color="secondary"
                 label="Enhanced"
-                :rules="[rules.required, rules.limit]"
+                :rules="[rules.required, rules.limit, rules.ratio]"
                 maxlength="2"
                 dense
               />
@@ -165,7 +166,7 @@
               depressed="true"
               tile
               :ripple="false"
-              @click="$emit('close')"
+              @click="validate"
             >
               Submit
             </v-btn>
@@ -198,6 +199,7 @@ export default {
 
       notation: '',
       desc: '',
+      valid: false,
 
       characters: unibfilters.data().characters,
       versions: unibfilters.data().versions,
@@ -209,13 +211,14 @@ export default {
       rules: {
         required: value => !!value || 'Required Field',
         limit: value => (value >= 0 && value <= 13) || '0-13',
+        ratio: value => value > this.bullets || 'More enhanced than bullets',
 
         twcheck: value =>
           value.includes('twitter.com') || value.includes('http://t.co') || 'Invalid Twitter URL',
         ytcheck: value =>
           value.includes('youtube.com') ||
           value.includes('https://youtu.be') ||
-          'Invalid Youtube Url',
+          'Invalid Youtube URL',
       },
     };
   },
@@ -227,6 +230,12 @@ export default {
       }
 
       return this.starters[this.version][this.character].slice(1);
+    },
+
+    validate: function() {
+      if (this.$refs.form.validate()) {
+        this.tw = !this.tw;
+      }
     },
 
     reset: function() {

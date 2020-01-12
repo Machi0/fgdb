@@ -49,7 +49,7 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="6" md="2" sm="4" xl="1" class="text-center" align="top">
+      <v-col cols="6" md="2" sm="4" xl="1" class="text-center mb-n6" align="top">
         <v-select
           v-model="pos"
           :items="screenpos"
@@ -58,7 +58,7 @@
           color="secondary"
         />
       </v-col>
-      <v-col cols="6" md="2" sm="4" xl="1" class="text-center mx-xl-6">
+      <v-col cols="6" md="2" sm="4" xl="1" class="text-center mx-xl-6 mb-n6">
         <v-row justify="center">
           <v-checkbox v-model="cs" label="Vorpal" color="secondary" ripple="false" flat />
         </v-row>
