@@ -13,6 +13,7 @@
               mdi-close
             </v-icon>
           </v-card-title>
+
           <v-card-text>
             <v-container>
               <v-row class="text-center">
@@ -40,10 +41,25 @@
                     </v-card>
                   </v-dialog>
                 </v-col>
+
                 <v-col>
-                  <v-icon color="red darken-1" size="45">
-                    mdi-youtube
-                  </v-icon>
+                  <v-dialog v-model="yt" max-width="600" transition="fade-transition" persistent>
+                    <template v-slot:activator="{ on }">
+                      <v-icon color="red darken-1" @click="(yt = !yt), (post = !post)" size="45">
+                        mdi-youtube
+                      </v-icon>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        Upload Youtube Video
+                        <v-spacer />
+                        <v-icon @click="yt = !yt" small color="error">
+                          mdi-close
+                        </v-icon>
+                      </v-card-title>
+                      <unibcombopost yt />
+                    </v-card>
+                  </v-dialog>
                 </v-col>
               </v-row>
             </v-container>
