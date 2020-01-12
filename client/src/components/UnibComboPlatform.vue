@@ -33,11 +33,11 @@
                       <v-card-title>
                         Upload Twitter Post
                         <v-spacer />
-                        <v-icon @click="tw = !tw" small color="error">
+                        <v-icon @click="(tw = !tw), resetForm()" small color="error">
                           mdi-close
                         </v-icon>
                       </v-card-title>
-                      <unibcombopost tw @close="tw = !tw" />
+                      <unibcombopost tw ref="form" />>
                     </v-card>
                   </v-dialog>
                 </v-col>
@@ -53,11 +53,11 @@
                       <v-card-title>
                         Upload Youtube Video
                         <v-spacer />
-                        <v-icon @click="yt = !yt" small color="error">
+                        <v-icon @click="(yt = !yt), resetForm()" small color="error">
                           mdi-close
                         </v-icon>
                       </v-card-title>
-                      <unibcombopost yt />
+                      <unibcombopost yt ref="form" />
                     </v-card>
                   </v-dialog>
                 </v-col>
@@ -86,6 +86,12 @@ export default {
       tw: false,
       yt: false,
     };
+  },
+
+  methods: {
+    resetForm: function() {
+      this.$refs.form.reset();
+    },
   },
 };
 </script>
