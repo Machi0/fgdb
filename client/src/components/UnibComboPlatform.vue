@@ -37,7 +37,7 @@
                           mdi-close
                         </v-icon>
                       </v-card-title>
-                      <unibcombopost tw ref="form" />>
+                      <unibcombopost tw ref="form" />
                     </v-card>
                   </v-dialog>
                 </v-col>
