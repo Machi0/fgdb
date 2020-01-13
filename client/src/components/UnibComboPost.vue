@@ -31,7 +31,7 @@
           </v-row>
 
           <v-row class="text-center" justify="center">
-            <v-col cols="3">
+            <v-col cols="4">
               <v-select
                 v-model="version"
                 :items="versions"
@@ -69,7 +69,43 @@
             </v-col>
           </v-row>
 
-          <v-row v-if="character == 'Eltnum'" justify="center" class="mb-n6">
+          <v-row class="text-center" justify="center">
+            <v-col>
+              <v-select
+                v-model="pos"
+                :items="screenpos"
+                label="Position"
+                item-color="secondary"
+                color="secondary"
+                :rules="[rules.required]"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="meter"
+                color="secondary"
+                label="Meter"
+                :rules="[rules.required, rules.meter]"
+                maxlength="3"
+                validate-on-blur
+              />
+            </v-col>
+          </v-row>
+
+          <v-row class="text-center mt-n6" justify="center">
+            <v-col cols="6" md="4" sm="4" lg="4" xl="4">
+              <v-row justify="center">
+                <v-checkbox v-model="cs" label="Vorpal" color="secondary" flat />
+              </v-row>
+            </v-col>
+            <v-col cols="6" md="4" sm="4" lg="4" xl="4">
+              <v-row justify="center">
+                <v-checkbox v-model="ch" label="Counter Hit" color="secondary" flat />
+              </v-row>
+            </v-col>
+          </v-row>
+
+          <v-row v-if="character == 'Eltnum'" justify="center" class="mt-n4">
             <v-col cols="2" />
             <v-col md="2">
               <v-text-field
@@ -79,6 +115,8 @@
                 :rules="[rules.required, rules.limit]"
                 maxlength="2"
                 dense
+                validate-on-blur
+                placeholder=" "
               />
             </v-col>
             <v-col md="2">
@@ -89,13 +127,15 @@
                 :rules="[rules.required, rules.limit, rules.ratio]"
                 maxlength="2"
                 dense
+                validate-on-blur
+                placeholder=" "
               />
             </v-col>
             <v-col cols="2" />
           </v-row>
 
-          <v-row v-if="character == 'Wagner'" justify="center" class="mb-n5">
-            <v-col md="4" class="text-center">
+          <v-row v-if="character == 'Wagner'" justify="center" class="mt-n10">
+            <v-col cols="6" md="4" sm="4" lg="4" xl="4" class="text-center">
               <v-row justify="center">
                 <v-checkbox
                   v-model="wagner.sw"
@@ -106,7 +146,7 @@
                 />
               </v-row>
             </v-col>
-            <v-col md="4" class="text-center">
+            <v-col cols="6" md="4" sm="4" lg="4" xl="4" class="text-center">
               <v-row justify="center">
                 <v-checkbox
                   v-model="wagner.sh"
@@ -119,7 +159,7 @@
             </v-col>
           </v-row>
 
-          <v-row v-if="character == 'Chaos'" justify="center" class="mb-n5">
+          <v-row v-if="character == 'Chaos'" justify="center" class="mt-n10">
             <v-col md="2" class="text-center">
               <v-row justify="center">
                 <v-checkbox
@@ -133,7 +173,7 @@
             </v-col>
           </v-row>
 
-          <v-row>
+          <v-row class="mt-n8">
             <v-col>
               <v-text-field
                 v-model="notation"
@@ -159,7 +199,7 @@
             </v-col>
           </v-row>
 
-          <v-row justify="center">
+          <v-row justify="center" class="mt-4">
             <v-btn
               color="primary"
               class="self-text-center"
@@ -196,6 +236,10 @@ export default {
       character: '',
       version: 'ST',
       starter: '',
+      meter: '',
+      cs: false,
+      ch: false,
+      pos: '',
 
       notation: '',
       desc: '',
@@ -204,6 +248,7 @@ export default {
       characters: unibfilters.data().characters,
       versions: unibfilters.data().versions,
       starters: unibfilters.data().starters,
+      screenpos: unibfilters.data().screenpos,
       eltnum: unibfilters.data().eltnum,
       chaos: unibfilters.data().chaos,
       wagner: unibfilters.data().wagner,
@@ -211,7 +256,8 @@ export default {
       rules: {
         required: value => !!value || 'Required Field',
         limit: value => (value >= 0 && value <= 13) || '0-13',
-        ratio: value => value > this.bullets || 'More enhanced than bullets',
+        ratio: value => value <= this.eltnum.bullets || 'More enhanced than bullets',
+        meter: value => (value >= 0 && value <= 200) || 'Must be 0-200',
 
         twcheck: value =>
           value.includes('twitter.com') || value.includes('http://t.co') || 'Invalid Twitter URL',
@@ -221,6 +267,14 @@ export default {
           'Invalid Youtube URL',
       },
     };
+  },
+
+  created() {
+    this.eltnum.enh = 0;
+    this.eltnum.bullets = 0;
+    this.wagner.sw = false;
+    this.wagner.sh = false;
+    this.chaos.azhi = false;
   },
 
   methods: {
@@ -240,6 +294,7 @@ export default {
 
     reset: function() {
       this.$refs.form.reset();
+      this.version = 'ST';
     },
   },
 };

@@ -70,7 +70,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="character == 'Eltnum'" justify="center" class="mt-n 6">
+    <v-row v-if="character == 'Eltnum'" justify="center">
       <v-col cols="2" />
       <v-col md="1">
         <v-text-field
@@ -79,6 +79,7 @@
           label="Bullets"
           :rules="[rules.required, rules.limit]"
           maxlength="2"
+          placeholder=" "
           dense
         />
       </v-col>
@@ -89,6 +90,7 @@
           label="Enhanced"
           :rules="[rules.required, rules.limit]"
           maxlength="2"
+          placeholder=" "
           dense
         />
       </v-col>
