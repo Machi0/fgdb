@@ -57,7 +57,10 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
             data['bullets'] = self.bullets
             data['enh'] = self.enh
         elif self.character == "wagner":
-            pass
+            data['wSword'] = self.wSword
+            data['wShield'] = self.wShield
+        elif self.character == "chaos":
+            data['azhi'] = self.azhi
 
         if self.yt != None:
             data['yt'] = self.yt
