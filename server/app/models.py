@@ -33,6 +33,12 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     tw = db.Column(db.String(300), index=True)
     bullets = db.Column(db.Integer, index=True)
     enh = db.Column(db.Integer, index=True)
+    wSword = db.Column(db.Boolean, index=True)
+    wShiled = db.Column(db.Boolean, index=True)
+    azhi = db.Column(db.Boolean, index=True)
+
+    notation = db.Column(db.String(140))
+    desc = db.Column(db.String(140))
 
     def to_dict(self):
         data = {
