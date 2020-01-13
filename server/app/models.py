@@ -34,7 +34,7 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     bullets = db.Column(db.Integer, index=True)
     enh = db.Column(db.Integer, index=True)
     wSword = db.Column(db.Boolean, index=True)
-    wShiled = db.Column(db.Boolean, index=True)
+    wShield = db.Column(db.Boolean, index=True)
     azhi = db.Column(db.Boolean, index=True)
 
     notation = db.Column(db.String(140))
