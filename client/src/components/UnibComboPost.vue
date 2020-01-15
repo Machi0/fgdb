@@ -31,6 +31,7 @@
                   spellcheck="false"
                   validate-on-blur
                   :readonly="loading"
+                  autocomplete="off"
                 />
               </v-col>
 
@@ -220,6 +221,7 @@
                   label="Notation (Optional)"
                   spellcheck="false"
                   :readonly="loading"
+                  autocomplete="off"
                 >
                 </v-text-field>
               </v-col>
@@ -234,6 +236,7 @@
                   label="Additional Notes (Optional)"
                   spellcheck="false"
                   :readonly="loading"
+                  autocomplete="off"
                 >
                 </v-text-field>
               </v-col>
@@ -253,6 +256,13 @@
                 Submit
               </v-btn>
             </v-row>
+
+            <v-snackbar v-model="badtime" :timeout="8000" top>
+              Error: Combo could not be posted
+              <v-icon @click="badtime = false" color="error" small>
+                mdi-close
+              </v-icon>
+            </v-snackbar>
           </v-form>
         </v-container>
       </v-card-text>
@@ -292,6 +302,7 @@ export default {
       success: false,
       badtime: false,
 
+      path: '/api/unib/combos',
       payload: {
         test: 'test',
       },
@@ -331,9 +342,9 @@ export default {
   methods: {
     postCombo() {
       this.loading = true;
-      const path = 'http://localhost:5000/api/unib/combos';
+
       this.$http
-        .post(path, this.payload, { timeout: 30000 })
+        .post(this.path, this.payload, { timeout: 30000 })
         .then(() => {
           this.success = true;
         })

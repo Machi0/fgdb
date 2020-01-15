@@ -5,7 +5,9 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
-Vue.prototype.$http = axios;
+Vue.prototype.$http = axios.create({
+  baseUrl: 'http://localhost:5000/',
+});
 
 new Vue({
   router,
