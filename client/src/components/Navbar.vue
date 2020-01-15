@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app color="primary" max-height="45" flat>
+  <v-app-bar app color="primary" max-height="45" flat>
     <v-toolbar-items>
       <v-hover v-slot:default="{ hover }">
         <router-link to="/">
@@ -29,7 +29,7 @@
         </router-link>
       </v-hover>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <style scoped>

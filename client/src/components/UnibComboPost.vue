@@ -64,8 +64,8 @@
               <v-col>
                 <v-autocomplete
                   v-model="character"
-                  @change="characterChange()"
                   :items="characters[version].slice(1)"
+                  @change="characterChange()"
                   :rules="[rules.required]"
                   label="Character"
                   item-color="secondary"
@@ -179,7 +179,6 @@
                     v-model="wagner.sw"
                     label="Sword Install"
                     color="secondary"
-                    ripple="false"
                     flat
                     :readonly="loading"
                   />
@@ -191,7 +190,6 @@
                     v-model="wagner.sh"
                     label="Shield Install"
                     color="secondary"
-                    ripple="false"
                     flat
                     :readonly="loading"
                   />
@@ -206,7 +204,6 @@
                     v-model="chaos.azhi"
                     label="Azhi"
                     color="secondary"
-                    ripple="false"
                     flat
                     :readonly="loading"
                   />
@@ -246,7 +243,7 @@
               <v-btn
                 color="primary"
                 class="self-text-center"
-                depressed="true"
+                :depressed="true"
                 tile
                 :ripple="false"
                 @click="validate"
@@ -295,6 +292,10 @@ export default {
       success: false,
       badtime: false,
 
+      payload: {
+        test: 'test',
+      },
+
       characters: unibfilters.data().characters,
       versions: unibfilters.data().versions,
       starters: unibfilters.data().starters,
@@ -328,16 +329,17 @@ export default {
   },
 
   methods: {
-    postCombo(payload) {
+    postCombo() {
       this.loading = true;
       const path = 'http://localhost:5000/api/unib/combos';
-      axios
-        .post(path, payload)
+      this.$http
+        .post(path, this.payload, { timeout: 30000 })
         .then(() => {
           this.success = true;
         })
         .catch(error => {
           this.badtime = true;
+          console.log(error);
         })
         .finally(() => (this.loading = false));
     },
@@ -348,6 +350,10 @@ export default {
       }
 
       return this.starters[this.version][this.character].slice(1);
+    },
+
+    characterChange() {
+      this.starter = '';
     },
 
     validate: function() {

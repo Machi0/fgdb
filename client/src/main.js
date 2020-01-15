@@ -5,10 +5,10 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
+Vue.prototype.$http = axios;
 
 new Vue({
   router,
-  axios,
   vuetify,
   render: h => h(App),
 }).$mount('#app');

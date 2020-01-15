@@ -60,12 +60,12 @@
       </v-col>
       <v-col cols="6" md="2" sm="4" xl="1" class="text-center mx-xl-6 mb-n6">
         <v-row justify="center">
-          <v-checkbox v-model="cs" label="Vorpal" color="secondary" ripple="false" flat />
+          <v-checkbox v-model="cs" label="Vorpal" color="secondary" flat />
         </v-row>
       </v-col>
       <v-col md="2" xl="1" class="text-center">
         <v-row justify="center">
-          <v-checkbox v-model="ch" label="Counter Hit" color="secondary" ripple="false" flat />
+          <v-checkbox v-model="ch" label="Counter Hit" color="secondary" flat />
         </v-row>
       </v-col>
     </v-row>
@@ -100,24 +100,12 @@
     <v-row v-if="character == 'Wagner'" justify="center" class="mt-n6">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
-          <v-checkbox
-            v-model="wagner.sw"
-            label="Sword Install"
-            color="secondary"
-            ripple="false"
-            flat
-          />
+          <v-checkbox v-model="wagner.sw" label="Sword Install" color="secondary" flat />
         </v-row>
       </v-col>
       <v-col md="2" class="text-center ml-xl-n12">
         <v-row justify="center">
-          <v-checkbox
-            v-model="wagner.sh"
-            label="Shield Install"
-            color="secondary"
-            ripple="false"
-            flat
-          />
+          <v-checkbox v-model="wagner.sh" label="Shield Install" color="secondary" flat />
         </v-row>
       </v-col>
     </v-row>
@@ -125,7 +113,7 @@
     <v-row v-if="character == 'Chaos'" justify="center" class="mt-n6">
       <v-col md="2" class="text-center">
         <v-row justify="center">
-          <v-checkbox v-model="chaos.azhi" label="Azhi" color="secondary" ripple="false" flat />
+          <v-checkbox v-model="chaos.azhi" label="Azhi" color="secondary" flat />
         </v-row>
       </v-col>
     </v-row>
