@@ -18,28 +18,19 @@
             <v-container>
               <v-row class="text-center">
                 <v-col>
+                  <v-icon color="blue" class="mr-3" @click="(tw = true), (post = !post)" size="45">
+                    mdi-twitter
+                  </v-icon>
                   <v-dialog v-model="tw" max-width="600" transition="fade-transition" persistent>
-                    <template v-slot:activator="{ on }">
-                      <v-icon
-                        color="blue"
-                        class="mr-3"
-                        @click="(tw = true), (post = !post)"
-                        size="45"
-                      >
-                        mdi-twitter
-                      </v-icon>
-                    </template>
                     <unibcombopost tw v-on:close="tw = $event" />
                   </v-dialog>
                 </v-col>
 
                 <v-col>
+                  <v-icon color="red darken-1" @click="(yt = true), (post = !post)" size="45">
+                    mdi-youtube
+                  </v-icon>
                   <v-dialog v-model="yt" max-width="600" transition="fade-transition" persistent>
-                    <template v-slot:activator="{ on }">
-                      <v-icon color="red darken-1" @click="(yt = true), (post = !post)" size="45">
-                        mdi-youtube
-                      </v-icon>
-                    </template>
                     <unibcombopost yt v-on:close="yt = $event" />
                   </v-dialog>
                 </v-col>
