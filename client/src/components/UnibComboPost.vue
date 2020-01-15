@@ -46,6 +46,7 @@
                   validate-on-blur
                   hint="Please add timestamp if necessary"
                   :readonly="loading"
+                  autocomplete="off"
                 />
               </v-col>
             </v-row>
@@ -113,6 +114,7 @@
                   maxlength="3"
                   validate-on-blur
                   :readonly="loading"
+                  autocomplete="off"
                 />
               </v-col>
             </v-row>
@@ -155,6 +157,7 @@
                   validate-on-blur
                   placeholder=" "
                   :readonly="loading"
+                  autocomplete="off"
                 />
               </v-col>
               <v-col md="2">
@@ -168,6 +171,7 @@
                   validate-on-blur
                   placeholder=" "
                   :readonly="loading"
+                  autocomplete="off"
                 />
               </v-col>
               <v-col cols="2" />
