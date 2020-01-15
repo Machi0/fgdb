@@ -23,42 +23,24 @@
                       <v-icon
                         color="blue"
                         class="mr-3"
-                        @click="(tw = !tw), (post = !post)"
+                        @click="(tw = true), (post = !post)"
                         size="45"
                       >
                         mdi-twitter
                       </v-icon>
                     </template>
-                    <v-card>
-                      <v-card-title>
-                        Upload Twitter Post
-                        <v-spacer />
-                        <v-icon @click="(tw = !tw), resetForm()" small color="error">
-                          mdi-close
-                        </v-icon>
-                      </v-card-title>
-                      <unibcombopost tw ref="form" />
-                    </v-card>
+                    <unibcombopost tw v-on:close="tw = $event" />
                   </v-dialog>
                 </v-col>
 
                 <v-col>
                   <v-dialog v-model="yt" max-width="600" transition="fade-transition" persistent>
                     <template v-slot:activator="{ on }">
-                      <v-icon color="red darken-1" @click="(yt = !yt), (post = !post)" size="45">
+                      <v-icon color="red darken-1" @click="(yt = true), (post = !post)" size="45">
                         mdi-youtube
                       </v-icon>
                     </template>
-                    <v-card>
-                      <v-card-title>
-                        Upload Youtube Video
-                        <v-spacer />
-                        <v-icon @click="(yt = !yt), resetForm()" small color="error">
-                          mdi-close
-                        </v-icon>
-                      </v-card-title>
-                      <unibcombopost yt ref="form" />
-                    </v-card>
+                    <unibcombopost yt v-on:close="yt = $event" />
                   </v-dialog>
                 </v-col>
               </v-row>
@@ -86,12 +68,6 @@ export default {
       tw: false,
       yt: false,
     };
-  },
-
-  methods: {
-    resetForm: function() {
-      this.$refs.form.reset();
-    },
   },
 };
 </script>
