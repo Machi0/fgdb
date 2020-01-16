@@ -25,7 +25,7 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     damage = db.Column(db.Integer, index=True, nullable=False) 
     cs = db.Column(db.Boolean, index=True, nullable=False) 
     ch = db.Column(db.Boolean, index=True, nullable=False)
-    ms = db.Column(db.Boolean, index=True, nullable=False) 
+    pos = db.Column(db.String(10), index=True, nullable=False) 
     starter = db.Column(db.String(10), index=True, nullable=False) 
     meter = db.Column(db.Integer, index=True, nullable=False)
     
@@ -48,7 +48,7 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
             'damage': self.damage,
             'cs': self.cs,
             'ch': self.ch,
-            'ms': self.ms,
+            'pos': self.pos,
             'starter': self.starter,
             'meter': self.meter
         }
@@ -72,8 +72,8 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     def from_dict(self, data):
         fields = [
             'character', 'ver', 'damage', 'cs', 'ch',
-            'starter', 'meter', 'ms', 'yt', 'tw', 'bullets',
-            'enh'
+            'starter', 'meter', 'pos', 'yt', 'tw', 'bullets',
+            'enh', 'wSword', 'wShield', 'azhi', 'notation', 'desc' 
         ]
 
         for field in fields:

@@ -91,6 +91,18 @@
                   :readonly="loading"
                 />
               </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="damage"
+                  color="secondary"
+                  label="Damage"
+                  :rules="[rules.required]"
+                  maxlength="6"
+                  validate-on-blur
+                  :readonly="loading"
+                  autocomplete="off"
+                />
+              </v-col>
             </v-row>
 
             <v-row class="text-center" justify="center">
@@ -297,6 +309,7 @@ export default {
       cs: false,
       ch: false,
       pos: '',
+      damage: '',
 
       notation: '',
       desc: '',
@@ -306,10 +319,7 @@ export default {
       success: false,
       badtime: false,
 
-      path: '/api/unib/combos',
-      payload: {
-        test: 'test',
-      },
+      path: 'unib/combos',
 
       characters: unibfilters.data().characters,
       versions: unibfilters.data().versions,
@@ -344,13 +354,30 @@ export default {
   },
 
   methods: {
+    postCreate() {
+      const payload = {
+        character: this.character,
+        ver: this.version,
+        damage: this.damage,
+        cs: this.cs,
+        ch: this.ch,
+        ms: this.screenpos,
+        starter: this.starter,
+        meter: this.meter,
+        pos: this.pos,
+      };
+
+      return payload;
+    },
+
     postCombo() {
       this.loading = true;
 
       this.$http
-        .post(this.path, this.payload, { timeout: 30000 })
-        .then(() => {
+        .post(this.path, this.postCreate(), { timeout: 30000 })
+        .then(response => {
           this.success = true;
+          console.log(response);
         })
         .catch(error => {
           this.badtime = true;

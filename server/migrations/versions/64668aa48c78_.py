@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a1cf986334b1
+Revision ID: 64668aa48c78
 Revises: 
-Create Date: 2020-01-13 00:56:36.203009
+Create Date: 2020-01-16 00:25:24.798652
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a1cf986334b1'
+revision = '64668aa48c78'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     sa.Column('damage', sa.Integer(), nullable=False),
     sa.Column('cs', sa.Boolean(), nullable=False),
     sa.Column('ch', sa.Boolean(), nullable=False),
-    sa.Column('ms', sa.Boolean(), nullable=False),
+    sa.Column('pos', sa.String(length=10), nullable=False),
     sa.Column('starter', sa.String(length=10), nullable=False),
     sa.Column('meter', sa.Integer(), nullable=False),
     sa.Column('yt', sa.String(length=300), nullable=True),
@@ -47,7 +47,7 @@ def upgrade():
     op.create_index(op.f('ix_unib_combos_damage'), 'unib_combos', ['damage'], unique=False)
     op.create_index(op.f('ix_unib_combos_enh'), 'unib_combos', ['enh'], unique=False)
     op.create_index(op.f('ix_unib_combos_meter'), 'unib_combos', ['meter'], unique=False)
-    op.create_index(op.f('ix_unib_combos_ms'), 'unib_combos', ['ms'], unique=False)
+    op.create_index(op.f('ix_unib_combos_pos'), 'unib_combos', ['pos'], unique=False)
     op.create_index(op.f('ix_unib_combos_starter'), 'unib_combos', ['starter'], unique=False)
     op.create_index(op.f('ix_unib_combos_tw'), 'unib_combos', ['tw'], unique=False)
     op.create_index(op.f('ix_unib_combos_ver'), 'unib_combos', ['ver'], unique=False)
@@ -65,7 +65,7 @@ def downgrade():
     op.drop_index(op.f('ix_unib_combos_ver'), table_name='unib_combos')
     op.drop_index(op.f('ix_unib_combos_tw'), table_name='unib_combos')
     op.drop_index(op.f('ix_unib_combos_starter'), table_name='unib_combos')
-    op.drop_index(op.f('ix_unib_combos_ms'), table_name='unib_combos')
+    op.drop_index(op.f('ix_unib_combos_pos'), table_name='unib_combos')
     op.drop_index(op.f('ix_unib_combos_meter'), table_name='unib_combos')
     op.drop_index(op.f('ix_unib_combos_enh'), table_name='unib_combos')
     op.drop_index(op.f('ix_unib_combos_damage'), table_name='unib_combos')

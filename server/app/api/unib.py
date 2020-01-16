@@ -17,8 +17,12 @@ def post_combo():
 
     if 'character' not in data or 'ver' not in data or 'damage' not in data or\
         'cs' not in data or 'ch' not in data or 'starter' not in data or\
-        'meter' not in data or 'ms' not in data:
+        'meter' not in data or 'pos' not in data:
             return bad_request("Fields missing data")
+    
+    if data['character'] == 'Eltnum' and ('bullets' not in data or 'enh' not in data):
+        return bad_request("Missing Eltnum fields")
+
     
     combo = UnibCombos()
     combo.from_dict(data)
