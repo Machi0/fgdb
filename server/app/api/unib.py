@@ -22,8 +22,14 @@ def post_combo():
     
     if data['character'] == 'Eltnum' and ('bullets' not in data or 'enh' not in data):
         return bad_request("Missing Eltnum fields")
-
+    elif data['character'] == 'Wagner' and ('wSword' not in data or 'wShield' not in data):
+        return bad_request("Missing Wagner fields")
+    elif data['character'] == 'Chaos' and 'azhi' not in data:
+        return bad_request("Missing Chaos fields")
     
+    if ('tw' not in data and 'yt' not in data) or ('tw' in data and 'yt' in data):
+        return bad_request("Missing URL")
+
     combo = UnibCombos()
     combo.from_dict(data)
     db.session.add(combo)

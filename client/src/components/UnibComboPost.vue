@@ -367,6 +367,32 @@ export default {
         pos: this.pos,
       };
 
+      if (this.yt) {
+        payload.yt = this.ytlink;
+      } else if (this.tw) {
+        payload.tw = this.twlink;
+      }
+
+      if (this.character === 'Eltnum') {
+        payload.bullets = this.eltnum.bullets;
+        payload.enh = this.eltnum.enh;
+      } else if (this.character === 'Wagner') {
+        payload.wSword = this.wagner.sw;
+        payload.wShield = this.sh;
+      } else if (this.character === 'Chaos') {
+        payload.azhi = this.chaos.azhi;
+      }
+
+      if (!!this.notation) {
+        payloadnotation = this.notation;
+      }
+
+      if (!!this.desc) {
+        payload.desc = this.desc;
+      }
+
+      console.log(payload);
+
       return payload;
     },
 
@@ -382,6 +408,7 @@ export default {
         .catch(error => {
           this.badtime = true;
           console.log(error);
+          console.log(error.response);
         })
         .finally(() => (this.loading = false));
     },
