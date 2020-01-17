@@ -22,7 +22,7 @@
                     mdi-twitter
                   </v-icon>
                   <v-dialog v-model="tw" max-width="600" transition="fade-transition" persistent>
-                    <unibcombopost tw v-on:close="tw = $event" />
+                    <unibcombopost tw v-on:close="tw = $event" v-on:success="$emit('success')" />
                   </v-dialog>
                 </v-col>
 
@@ -31,7 +31,7 @@
                     mdi-youtube
                   </v-icon>
                   <v-dialog v-model="yt" max-width="600" transition="fade-transition" persistent>
-                    <unibcombopost yt v-on:close="yt = $event" />
+                    <unibcombopost yt v-on:close="yt = $event" v-on:success="$emit('success')" />
                   </v-dialog>
                 </v-col>
               </v-row>

@@ -272,7 +272,6 @@
                 Submit
               </v-btn>
             </v-row>
-
             <v-snackbar v-model="badtime" :timeout="8000" top>
               Error: Combo could not be posted
               <v-icon @click="badtime = false" color="error" small>
@@ -316,7 +315,6 @@ export default {
 
       valid: false,
       loading: false,
-      success: false,
       badtime: false,
 
       path: 'unib/combos',
@@ -336,10 +334,12 @@ export default {
         meter: value => (value >= 0 && value <= 200) || 'Must be 0-200',
 
         twcheck: value =>
-          value.includes('twitter.com') || value.includes('http://t.co') || 'Invalid Twitter URL',
+          /twitter.com/.test(value) ||
+          new RegExp('http://t.co/').test(value) ||
+          'Invalid Twitter URL',
         ytcheck: value =>
-          value.includes('youtube.com') ||
-          value.includes('https://youtu.be') ||
+          /youtube.com/.test(value) ||
+          new RegExp('https://youtu.be').test(value) ||
           'Invalid Youtube URL',
       },
     };
@@ -361,7 +361,7 @@ export default {
         damage: this.damage,
         cs: this.cs,
         ch: this.ch,
-        ms: this.screenpos,
+        ms: this.pos,
         starter: this.starter,
         meter: this.meter,
         pos: this.pos,
@@ -378,13 +378,13 @@ export default {
         payload.enh = this.eltnum.enh;
       } else if (this.character === 'Wagner') {
         payload.wSword = this.wagner.sw;
-        payload.wShield = this.sh;
+        payload.wShield = this.wagner.sh;
       } else if (this.character === 'Chaos') {
         payload.azhi = this.chaos.azhi;
       }
 
       if (!!this.notation) {
-        payloadnotation = this.notation;
+        payload.notation = this.notation;
       }
 
       if (!!this.desc) {
@@ -402,7 +402,9 @@ export default {
       this.$http
         .post(this.path, this.postCreate(), { timeout: 30000 })
         .then(response => {
-          this.success = true;
+          this.$emit('close', false);
+          this.$emit('success');
+          this.reset();
           console.log(response);
         })
         .catch(error => {
@@ -434,6 +436,11 @@ export default {
     reset: function() {
       this.$refs.form.reset();
       this.version = 'ST';
+      this.cs = false;
+      this.ch = false;
+      this.sw = false;
+      this.sh = false;
+      this.azhi = false;
     },
   },
 };

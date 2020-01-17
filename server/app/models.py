@@ -53,19 +53,24 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
             'meter': self.meter
         }
 
-        if self.character == "eltnum":
+        if self.character == "Eltnum":
             data['bullets'] = self.bullets
             data['enh'] = self.enh
-        elif self.character == "wagner":
+        elif self.character == "Wagner":
             data['wSword'] = self.wSword
             data['wShield'] = self.wShield
-        elif self.character == "chaos":
+        elif self.character == "Chaos":
             data['azhi'] = self.azhi
 
         if self.yt != None:
             data['yt'] = self.yt
         elif self.tw != None:
             data['tw'] = self.tw
+        
+        if self.desc != None:
+            data['desc'] = self.desc
+        if self.notation != None:
+            data['notation'] = self.notation
     
         return data
     

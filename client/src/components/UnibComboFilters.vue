@@ -118,7 +118,14 @@
       </v-col>
     </v-row>
 
-    <unibcomboplatform />
+    <unibcomboplatform v-on:success="success = true" />
+
+    <v-snackbar v-model="success" :timeout="5000" top>
+      Combo posted
+      <v-icon @click="success = false" color="error" small>
+        mdi-close
+      </v-icon>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -197,6 +204,7 @@ export default {
       meter: [0, 200],
       ch: false,
       cs: false,
+      success: false,
 
       eltnum: {
         bullets: 13,
