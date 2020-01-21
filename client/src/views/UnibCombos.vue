@@ -1,15 +1,18 @@
 <template>
   <div>
     <unibfilters />
+    <getcombos />
   </div>
 </template>
 
 <script>
 import unibfilters from '@/components/UnibComboFilters.vue';
+import getcombos from '@/components/UnibComboGet.vue';
 
 export default {
   components: {
     unibfilters,
+    getcombos,
   },
 
   data() {

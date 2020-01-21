@@ -7,7 +7,7 @@
             src="@/assets/53454.png"
             alt="FGDB Logo"
             contain
-            width="43"
+            max-width="43"
             :class="{ 'on-hover': hover }"
             class="ml-4"
           />
@@ -22,7 +22,7 @@
             src="@/assets/453345.png"
             alt="UNIB Logo"
             contain
-            width="130"
+            max-width="130"
             :class="{ 'on-hover': hover }"
             class="fade"
           />
