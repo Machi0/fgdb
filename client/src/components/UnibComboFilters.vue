@@ -49,7 +49,7 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="6" md="2" sm="4" xl="1" class="text-center mb-n6" align="top">
+      <v-col cols="6" md="2" sm="4" xl="1" class="text-center mb-n6">
         <v-select
           v-model="pos"
           :items="screenpos"
@@ -118,7 +118,21 @@
       </v-col>
     </v-row>
 
-    <unibcomboplatform v-on:success="success = true" />
+    <v-row justify="center" class="text-center">
+      <v-col cols="4" md="2" lg="2" xl="1" sm="3">
+        <v-select
+          dense
+          v-model="filter"
+          :items="filters"
+          label="Filter By"
+          item-color="secondary"
+          color="secondary"
+        />
+      </v-col>
+      <v-col cols="1">
+        <unibcomboplatform v-on:success="success = true" />
+      </v-col>
+    </v-row>
 
     <v-snackbar v-model="success" :timeout="5000" top>
       Combo posted
@@ -194,6 +208,7 @@ export default {
       },
       versions: ['ST', 'CLR'],
       screenpos: ['Midscreen', 'Corner'],
+      filters: ['Newest', 'Damage'],
 
       starters: unibstarters.data(),
 
@@ -205,6 +220,7 @@ export default {
       ch: false,
       cs: false,
       success: false,
+      filter: 'Newest',
 
       eltnum: {
         bullets: 13,
