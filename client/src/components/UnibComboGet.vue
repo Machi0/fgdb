@@ -7,7 +7,7 @@
         outlined
         tile
         width="290"
-        class="mx-4 mb-6"
+        class="mx-6 mb-8"
       >
         <v-card-title class="my-n2">
           <v-img
@@ -17,8 +17,12 @@
             max-width="35"
           />
           <v-spacer />
-          <v-icon v-if="'tw' in post" color="blue" size="30">mdi-twitter</v-icon>
-          <v-icon v-else color="red darken-1" size="30">mdi-youtube</v-icon>
+          <a v-if="'tw' in post" :href="post.tw" style="text-decoration: none">
+            <v-icon color="blue" size="30">mdi-twitter</v-icon>
+          </a>
+          <a v-else :href="post.yt" style="text-decoration: none"
+            ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
+          </a>
           <v-spacer />
           <v-icon size="30" color="grey darken-1">mdi-flag</v-icon>
         </v-card-title>

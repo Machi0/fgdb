@@ -334,11 +334,13 @@ export default {
         meter: value => (value >= 0 && value <= 200) || 'Must be 0-200',
 
         twcheck: value =>
-          /twitter.com/.test(value) ||
+          new RegExp('https://twitter.com').test(value) ||
+          new RegExp('https://mobile.twitter.com').test(value) ||
           new RegExp('http://t.co/').test(value) ||
           'Invalid Twitter URL',
         ytcheck: value =>
-          /youtube.com/.test(value) ||
+          new RegExp('https://www.youtube.com').test(value) ||
+          new RegExp('https://m.youtube.com').test(value) ||
           new RegExp('https://youtu.be').test(value) ||
           'Invalid Youtube URL',
       },
