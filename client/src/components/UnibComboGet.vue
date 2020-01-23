@@ -163,13 +163,19 @@ export default {
       page: 1,
       totalPages: 1,
       posts: [],
-      path: 'unib/combos',
+      path: this.$route.fullPath,
       loading: true,
     };
   },
 
   created() {
     this.getPosts();
+  },
+
+  watch: {
+    page: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { page: this.page }) });
+    },
   },
 
   methods: {

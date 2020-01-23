@@ -1,7 +1,7 @@
 <template>
   <div>
     <unibfilters />
-    <getcombos />
+    <getcombos ref="get" />
   </div>
 </template>
 
@@ -22,6 +22,13 @@ export default {
   created() {
     this.$vuetify.theme.themes.dark.primary = '#5E35B1';
     this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
+  },
+
+  watch: {
+    $route(to, from) {
+      this.$refs.get.path = this.$route.fullPath;
+      this.$refs.get.getPosts();
+    },
   },
 };
 </script>
