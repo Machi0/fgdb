@@ -160,7 +160,7 @@ export default {
 
   data() {
     return {
-      page: 1,
+      page: parseInt(this.$route.query.page),
       totalPages: 1,
       posts: [],
       path: this.$route.fullPath,
