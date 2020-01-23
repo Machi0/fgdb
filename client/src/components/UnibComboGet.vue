@@ -27,44 +27,96 @@
           <v-row>
             <v-col>
               <div>Starter:</div>
-              <div>Damage:</div>
-              <div>Meter:</div>
-              <div>Counter Hit:</div>
-              <div>Vorpal:</div>
-              <div v-if="'bullets' in post">Bullets:</div>
-              <div v-if="'enh' in post">Enhanced:</div>
-              <div v-if="'wSword' in post">Sword Install:</div>
-              <div v-if="'wShield' in post">Shield Install:</div>
-              <div v-if="'azhi' in post">Azhi:</div>
             </v-col>
-            <v-spacer class="ml-n12" />
-
+            <v-spacer />
             <v-col class="text-end">
               <div>{{ post.starter }}</div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <div>Damage:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
               <div>{{ post.damage }}</div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <div>Meter:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
               <div>{{ post.meter }}</div>
-              <div>
-                <v-icon v-if="post.ch" size="18" color="green">mdi-check</v-icon>
-                <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
-              </div>
-              <div>
-                <v-icon v-if="post.cs" size="18" color="green">mdi-check</v-icon>
-                <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
-              </div>
-              <div v-if="'bullets' in post">{{ post.bullets }}</div>
-              <div v-if="'enh' in post">{{ post.enh }}</div>
-              <div v-if="'wSword' in post">
-                <v-icon v-if="post.wSword" size="18" color="green">mdi-check</v-icon>
-                <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
-              </div>
-              <div v-if="'wShield' in post">
-                <v-icon v-if="post.wShield" size="18" color="green">mdi-check</v-icon>
-                <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
-              </div>
-              <div v-if="'azhi' in post">
-                <v-icon v-if="post.azhi" size="18" color="green">mdi-check</v-icon>
-                <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
-              </div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <div>Counter Hit:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
+              <v-icon v-if="post.ch" size="18" color="green">mdi-check</v-icon>
+              <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <div>Vorpal:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
+              <v-icon v-if="post.cs" size="18" color="green">mdi-check</v-icon>
+              <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
+            </v-col>
+          </v-row>
+          <v-row v-if="'bullets' in post">
+            <v-col>
+              <div>Bullets:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
+              <div>{{ post.bullets }}</div>
+            </v-col>
+          </v-row>
+          <v-row v-if="'enh' in post">
+            <v-col>
+              <div>Enhanced:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
+              <div>{{ post.enh }}</div>
+            </v-col>
+          </v-row>
+          <v-row v-if="'wSword' in post">
+            <v-col>
+              <div>Sword Install:</div>
+            </v-col>
+            <v-spacer class="ml-n12" />
+            <v-col class="text-end">
+              <v-icon v-if="post.wSword" size="18" color="green">mdi-check</v-icon>
+              <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
+            </v-col>
+          </v-row>
+          <v-row v-if="'wShield' in post">
+            <v-col>
+              <div>Shield Install:</div>
+            </v-col>
+            <v-spacer class="ml-n12" />
+            <v-col class="text-end">
+              <v-icon v-if="post.wShield" size="18" color="green">mdi-check</v-icon>
+              <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
+            </v-col>
+          </v-row>
+          <v-row v-if="'azhi' in post">
+            <v-col>
+              <div>Azhi:</div>
+            </v-col>
+            <v-spacer />
+            <v-col class="text-end">
+              <v-icon v-if="post.azhi" size="18" color="green">mdi-check</v-icon>
+              <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
             </v-col>
           </v-row>
 
