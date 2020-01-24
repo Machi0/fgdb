@@ -212,28 +212,28 @@ export default {
 
       starters: unibstarters.data(),
 
-      character: 'All',
-      version: 'ST',
-      pos: 'Midscreen',
-      starter: 'All',
-      meter: [0, 200],
-      ch: false,
-      cs: false,
+      character: this.initVars('char'),
+      version: this.initVars('ver'),
+      pos: this.initVars('pos'),
+      starter: this.initVars('str'),
+      meter: this.initVars('mtr'),
+      ch: this.initVars('ch'),
+      cs: this.initVars('cs'),
       success: false,
-      filter: 'Newest',
+      filter: this.initVars('flt'),
 
       eltnum: {
-        bullets: 13,
-        enh: 13,
+        bullets: this.initVars('blt'),
+        enh: this.initVars('enh'),
       },
 
       wagner: {
-        sw: true,
-        sh: true,
+        sw: this.initVars('sw'),
+        sh: this.initVars('sh'),
       },
 
       chaos: {
-        azhi: true,
+        azhi: this.initVars('az'),
       },
 
       rules: {
@@ -246,6 +246,66 @@ export default {
   watch: {
     character: function() {
       this.$router.push({ query: Object.assign({}, this.$route.query, { char: this.character }) });
+    },
+
+    version: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { ver: this.version }) });
+    },
+
+    pos: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { pos: this.pos }) });
+    },
+
+    starter: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { str: this.starter }) });
+    },
+
+    meter: function() {
+      setTimeout(() => {
+        this.$router.push({ query: Object.assign({}, this.$route.query, { mtr1: this.meter[0] }) });
+        this.$router.push({ query: Object.assign({}, this.$route.query, { mtr2: this.meter[1] }) });
+      }, 500);
+    },
+
+    ch: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { ch: this.ch }) });
+    },
+
+    cs: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
+    },
+
+    filter: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { flt: this.filter }) });
+    },
+
+    'eltnum.bullets': function() {
+      this.validate();
+      if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13) {
+        this.$router.push({
+          query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
+        });
+      }
+    },
+
+    'eltnum.enh': function() {
+      if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13) {
+        this.$router.push({
+          query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
+        });
+      }
+    },
+
+    'wagner.sw': function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { sw: this.wagner.sw }) });
+    },
+
+    'wagner.sh': function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { sh: this.wagner.sh }) });
+    },
+
+    'chaos.azhi': function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }) });
     },
   },
 
@@ -263,6 +323,89 @@ export default {
 
     characterChange() {
       this.starter = 'All';
+    },
+
+    initVars(init) {
+      if (this.$route.query.char && init === 'char') {
+        return this.$route.query.char;
+      } else if (init === 'char') {
+        return 'All';
+      }
+
+      if (this.$route.query.ver && init === 'ver') {
+        return this.$route.query.ver;
+      } else if (init === 'ver') {
+        return 'ST';
+      }
+
+      if (this.$route.query.pos && init === 'pos') {
+        return this.$route.query.pos;
+      } else if (init === 'pos') {
+        return 'Midscreen';
+      }
+
+      if (this.$route.query.str && init === 'str') {
+        return this.$route.query.str;
+      } else if (init === 'str') {
+        return 'All';
+      }
+
+      if (this.$route.query.mtr1 && this.$route.query.mtr2 && init === 'mtr') {
+        var meter = [];
+        meter[0] = parseInt(this.$route.query.mtr1);
+        meter[1] = parseInt(this.$route.query.mtr2);
+        return meter;
+      } else if (init === 'mtr') {
+        return [0, 200];
+      }
+
+      if (this.$route.query.cs && init === 'cs') {
+        return this.$route.query.cs === 'true';
+      } else if (init === 'cs') {
+        return false;
+      }
+
+      if (this.$route.query.ch && init === 'ch') {
+        return this.$route.query.ch === 'true';
+      } else if (init === 'ch') {
+        return false;
+      }
+
+      if (this.$route.query.flt && init === 'flt') {
+        return this.$route.query.flt;
+      } else if (init === 'flt') {
+        return 'Newest';
+      }
+
+      if (this.$route.query.blt && init === 'blt') {
+        return parseInt(this.$route.query.blt);
+      } else if (init === 'blt') {
+        return 13;
+      }
+
+      if (this.$route.query.enh && init === 'enh') {
+        return parseInt(this.$route.query.enh);
+      } else if (init === 'enh') {
+        return 13;
+      }
+
+      if (this.$route.query.sw && init === 'sw') {
+        return this.$route.query.sw === 'true';
+      } else if (init === 'sw') {
+        return false;
+      }
+
+      if (this.$route.query.sh && init === 'sh') {
+        return this.$route.query.sh === 'true';
+      } else if (init === 'ch') {
+        return false;
+      }
+
+      if (this.$route.query.az && init === 'az') {
+        return this.$route.query.az === 'true';
+      } else if (init === 'az') {
+        return false;
+      }
     },
   },
 };
