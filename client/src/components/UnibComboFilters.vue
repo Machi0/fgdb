@@ -243,6 +243,12 @@ export default {
     };
   },
 
+  watch: {
+    character: function() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { char: this.character }) });
+    },
+  },
+
   methods: {
     getStarters() {
       return this.starters[this.version][this.character];
