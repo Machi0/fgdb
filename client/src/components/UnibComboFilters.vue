@@ -130,7 +130,7 @@
         />
       </v-col>
       <v-col cols="1">
-        <unibcomboplatform v-on:success="success = true" />
+        <unibcomboplatform v-on:success="(success = true), $emit('success')" />
       </v-col>
     </v-row>
 

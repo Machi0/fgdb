@@ -51,6 +51,15 @@
               </v-row>
               <v-row>
                 <v-col>
+                  <div>Position:</div>
+                </v-col>
+                <v-spacer />
+                <v-col class="text-end">
+                  <div>{{ post.pos }}</div>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
                   <div>Meter:</div>
                 </v-col>
                 <v-spacer />
@@ -127,12 +136,12 @@
                 </v-col>
               </v-row>
 
-              <v-row v-if="'notation' in post" justify="center" class="mt-n3">
+              <v-row v-if="'notation' in post" justify="center" class="">
                 <v-col class="text-center caption">
                   <div>Notation: {{ post.notation }}</div>
                 </v-col>
               </v-row>
-              <v-row v-if="'desc' in post" justify="center" class="mt-n3">
+              <v-row v-if="'desc' in post" justify="center" class="">
                 <v-col class="text-center caption">
                   <div>Notes: {{ post.desc }}</div>
                 </v-col>
@@ -160,7 +169,7 @@ export default {
 
   data() {
     return {
-      page: parseInt(this.$route.query.page),
+      page: this.initPage(),
       totalPages: 1,
       posts: [],
       path: this.$route.fullPath,
@@ -193,6 +202,14 @@ export default {
           console.error(error);
         })
         .finally(() => (this.loading = false));
+    },
+
+    initPage() {
+      if (this.$route.query.page) {
+        return parseInt(this.$route.query.page);
+      }
+
+      return 1;
     },
   },
 };

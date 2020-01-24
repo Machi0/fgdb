@@ -8,7 +8,8 @@ from app.api.errors import bad_request
 def get_combo():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 24, type=int), 100)
-    data = UnibCombos.to_collection_dict(UnibCombos.query, page, per_page, 'api.unib.get_combo')
+    query = UnibCombos.query.order_by(UnibCombos.id.desc())
+    data = UnibCombos.to_collection_dict(query, page, per_page, 'api.unib.get_combo')
     return jsonify(data)
 
 @bp.route('unib/combos/', methods=['POST'])
