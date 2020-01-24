@@ -317,7 +317,7 @@ export default {
       loading: false,
       badtime: false,
 
-      path: 'unib/combos',
+      path: 'unib/combos/',
 
       characters: unibfilters.data().characters,
       versions: unibfilters.data().versions,
