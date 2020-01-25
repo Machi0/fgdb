@@ -102,6 +102,16 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         if request.args.get('mtr1') is not None and request.args.get('mtr2') is not None:
             query = query.filter(self.meter>=int(request.args.get('mtr1')))
             query = query.filter(self.meter<=int(request.args.get('mtr2')))
+        
+        if request.args.get('pos') is not None:
+            query = query.filter_by(pos=request.args.get('pos'))
+        else:
+            query = query.filter_by(pos='Midscreen')
+
+        if request.args.get('cs') is not None and request.args.get('cs') == 'true':
+            query = query.filter_by(cs=True)
+        else:
+            query = query.filter_by(cs=False)
 
         if request.args.get('flt') == 'Damage':
             query = query.order_by(self.damage.desc())

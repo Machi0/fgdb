@@ -133,6 +133,7 @@
         <unibcomboplatform v-on:success="(success = true), $emit('success')" />
       </v-col>
     </v-row>
+    {{ this.ch }}
 
     <v-snackbar v-model="success" :timeout="5000" top>
       Combo posted
@@ -221,17 +222,14 @@ export default {
       cs: this.initVars('cs'),
       success: false,
       filter: this.initVars('flt'),
-
       eltnum: {
         bullets: this.initVars('blt'),
         enh: this.initVars('enh'),
       },
-
       wagner: {
         sw: this.initVars('sw'),
         sh: this.initVars('sh'),
       },
-
       chaos: {
         azhi: this.initVars('az'),
       },
@@ -262,9 +260,13 @@ export default {
 
     meter: function() {
       setTimeout(() => {
-        this.$router.push({ query: Object.assign({}, this.$route.query, { mtr1: this.meter[0] }) });
-        this.$router.push({ query: Object.assign({}, this.$route.query, { mtr2: this.meter[1] }) });
-      }, 500);
+        this.$router
+          .push({ query: Object.assign({}, this.$route.query, { mtr1: this.meter[0] }) })
+          .catch(err => {});
+        this.$router
+          .push({ query: Object.assign({}, this.$route.query, { mtr2: this.meter[1] }) })
+          .catch(err => {});
+      }, 700);
     },
 
     ch: function() {
@@ -309,6 +311,10 @@ export default {
     },
   },
 
+  created() {
+    this.initVars();
+  },
+
   methods: {
     getStarters() {
       return this.starters[this.version][this.character];
@@ -331,25 +337,21 @@ export default {
       } else if (init === 'char') {
         return 'All';
       }
-
       if (this.$route.query.ver && init === 'ver') {
         return this.$route.query.ver;
       } else if (init === 'ver') {
         return 'ST';
       }
-
       if (this.$route.query.pos && init === 'pos') {
         return this.$route.query.pos;
       } else if (init === 'pos') {
         return 'Midscreen';
       }
-
       if (this.$route.query.str && init === 'str') {
         return this.$route.query.str;
       } else if (init === 'str') {
         return 'All';
       }
-
       if (this.$route.query.mtr1 && this.$route.query.mtr2 && init === 'mtr') {
         var meter = [];
         meter[0] = parseInt(this.$route.query.mtr1);
@@ -358,49 +360,41 @@ export default {
       } else if (init === 'mtr') {
         return [0, 200];
       }
-
       if (this.$route.query.cs && init === 'cs') {
         return this.$route.query.cs === 'true';
       } else if (init === 'cs') {
         return false;
       }
-
       if (this.$route.query.ch && init === 'ch') {
         return this.$route.query.ch === 'true';
       } else if (init === 'ch') {
         return false;
       }
-
       if (this.$route.query.flt && init === 'flt') {
         return this.$route.query.flt;
       } else if (init === 'flt') {
         return 'Newest';
       }
-
       if (this.$route.query.blt && init === 'blt') {
         return parseInt(this.$route.query.blt);
       } else if (init === 'blt') {
         return 13;
       }
-
       if (this.$route.query.enh && init === 'enh') {
         return parseInt(this.$route.query.enh);
       } else if (init === 'enh') {
         return 13;
       }
-
       if (this.$route.query.sw && init === 'sw') {
         return this.$route.query.sw === 'true';
       } else if (init === 'sw') {
         return false;
       }
-
       if (this.$route.query.sh && init === 'sh') {
         return this.$route.query.sh === 'true';
       } else if (init === 'ch') {
         return false;
       }
-
       if (this.$route.query.az && init === 'az') {
         return this.$route.query.az === 'true';
       } else if (init === 'az') {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <unibfilters v-on:success="$refs.get.getPosts()" />
+    <unibfilters ref="filter" v-on:success="$refs.get.getPosts()" />
     <getcombos ref="get" />
   </div>
 </template>
