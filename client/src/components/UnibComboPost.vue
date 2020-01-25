@@ -286,6 +286,7 @@
 </template>
 
 <script>
+import unibstarters from '@/components/UnibStarters.vue';
 import unibfilters from '@/components/UnibComboFilters.vue';
 
 export default {
@@ -319,13 +320,73 @@ export default {
 
       path: 'unib/combos/',
 
-      characters: unibfilters.data().characters,
-      versions: unibfilters.data().versions,
-      starters: unibfilters.data().starters,
-      screenpos: unibfilters.data().screenpos,
-      eltnum: unibfilters.data().eltnum,
-      chaos: unibfilters.data().chaos,
-      wagner: unibfilters.data().wagner,
+      characters: {
+        ST: [
+          'All',
+          'Akatsuki',
+          'Byakuya',
+          'Carmine',
+          'Chaos',
+          'Eltnum',
+          'Enkidu',
+          'Gordeau',
+          'Hilda',
+          'Hyde',
+          'Linne',
+          'Merkava',
+          'Mika',
+          'Nanase',
+          'Orie',
+          'Phonon',
+          'Seth',
+          'Vatista',
+          'Wagner',
+          'Waldstein',
+          'Yuzuriha',
+        ],
+
+        CLR: [
+          'All',
+          'Akatsuki',
+          'Byakuya',
+          'Carmine',
+          'Chaos',
+          'Eltnum',
+          'Enkidu',
+          'Gordeau',
+          'Hilda',
+          'Hyde',
+          'Linne',
+          'Londrekia',
+          'Merkava',
+          'Mika',
+          'Nanase',
+          'Orie',
+          'Phonon',
+          'Seth',
+          'Vatista',
+          'Wagner',
+          'Waldstein',
+          'Yuzuriha',
+        ],
+      },
+      versions: ['ST', 'CLR'],
+      screenpos: ['Midscreen', 'Corner'],
+      starters: unibstarters.data(),
+
+      eltnum: {
+        bullets: 0,
+        enh: 0,
+      },
+
+      wagner: {
+        sw: false,
+        sh: false,
+      },
+
+      chaos: {
+        azhi: false,
+      },
 
       rules: {
         required: value => !!value || 'Required Field',
@@ -440,9 +501,9 @@ export default {
       this.version = 'ST';
       this.cs = false;
       this.ch = false;
-      this.sw = false;
-      this.sh = false;
-      this.azhi = false;
+      this.wagner.sw = false;
+      this.wagner.sh = false;
+      this.chaos.azhi = false;
     },
   },
 };
