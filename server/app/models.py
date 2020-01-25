@@ -86,9 +86,16 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
                 setattr(self, field, data[field])
     
     def get_query(self):
+        query = self.query
+        
+        if request.args.get('char') is not None and request.args.get('char') != 'All':
+            query = self.query.filter_by(character=request.args.get('char'))
+
+
         if request.args.get('flt') != 'Damage':
-            query = self.query.order_by(self.id.desc())
+            query = query.order_by(self.id.desc())
         else:
-            query = self.query.order_by(self.damage.desc())
+            query = query.order_by(self.damage.desc())
+        
 
         return query
