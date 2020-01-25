@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, request
 from app import db
 
 class PaginatedAPIMixin(object):
@@ -84,3 +84,11 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         for field in fields:
             if field in data:
                 setattr(self, field, data[field])
+    
+    def get_query(self):
+        if request.args.get('flt') != 'Damage':
+            query = self.query.order_by(self.id.desc())
+        else:
+            query = self.query.order_by(self.damage.desc())
+
+        return query

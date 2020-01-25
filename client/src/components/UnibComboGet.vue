@@ -18,6 +18,7 @@
                 alt="Character Portrait"
                 contain
                 max-width="35"
+                eager
               />
               <v-spacer />
               <a v-if="'tw' in post" :href="post.tw" style="text-decoration: none">
