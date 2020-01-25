@@ -87,15 +87,25 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     
     def get_query(self):
         query = self.query
-        
+
         if request.args.get('char') is not None and request.args.get('char') != 'All':
-            query = self.query.filter_by(character=request.args.get('char'))
+            query = query.filter_by(character=request.args.get('char'))
+        
+        if request.args.get('str') is not None and request.args.get('str') != 'All':
+            query = query.filter_by(starter=request.args.get('str'))
 
-
-        if request.args.get('flt') != 'Damage':
-            query = query.order_by(self.id.desc())
+        if request.args.get('ver') is not None and request.args.get('ver') == 'CLR':
+            query = query.filter_by(ver=request.args.get('ver'))
         else:
+            query = query.filter_by(ver='ST')
+        
+        if request.args.get('mtr1') is not None and request.args.get('mtr2') is not None:
+            query = query.filter(self.meter>=int(request.args.get('mtr1')))
+            query = query.filter(self.meter<=int(request.args.get('mtr2')))
+
+        if request.args.get('flt') == 'Damage':
             query = query.order_by(self.damage.desc())
         
+        query = query.order_by(self.id.desc())
 
         return query
