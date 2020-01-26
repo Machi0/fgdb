@@ -108,10 +108,31 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         else:
             query = query.filter_by(pos='Midscreen')
 
-        if request.args.get('cs') is not None and request.args.get('cs') == 'true':
-            query = query.filter_by(cs=True)
-        else:
+        if request.args.get('cs') is not None and request.args.get('cs') == 'false':
             query = query.filter_by(cs=False)
+
+        if request.args.get('ch') is not None and request.args.get('ch') == 'true':
+            query = query.filter_by(ch=True)
+        else:
+            query = query.filter_by(ch=False)
+        
+        if request.args.get('blt') is not None and request.args.get('char') == 'Eltnum':
+            query = query.filter(self.bullets<=int(request.args.get('blt')))
+
+        if request.args.get('enh') is not None and request.args.get('char') == 'Eltnum':
+            query = query.filter(self.enh<=int(request.args.get('enh')))
+
+        if request.args.get('sw') is not None and request.args.get('char') == 'Wagner' \
+           and request.args.get('sw') == 'false':
+            query = query.filter_by(wSword=False)
+
+        if request.args.get('sh') is not None and request.args.get('char') == 'Wagner' \
+           and request.args.get('sh') == 'false':
+            query = query.filter_by(wShield=False)
+
+        if request.args.get('az') is not None and request.args.get('char') == 'Chaos' \
+           and request.args.get('az') == 'false':
+            query = query.filter_by(azhi=False)
 
         if request.args.get('flt') == 'Damage':
             query = query.order_by(self.damage.desc())

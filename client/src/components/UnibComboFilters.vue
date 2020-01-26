@@ -133,7 +133,6 @@
         <unibcomboplatform v-on:success="(success = true), $emit('success')" />
       </v-col>
     </v-row>
-    {{ this.ch }}
 
     <v-snackbar v-model="success" :timeout="5000" top>
       Combo posted
@@ -282,20 +281,27 @@ export default {
     },
 
     'eltnum.bullets': function() {
-      this.validate();
-      if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13) {
-        this.$router.push({
-          query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
-        });
-      }
+      setTimeout(() => {
+        if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13 && this.eltnum.bullets) {
+          this.$router
+            .push({
+              query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
+            })
+            .catch(err => {});
+        }
+      }, 700);
     },
 
     'eltnum.enh': function() {
-      if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13) {
-        this.$router.push({
-          query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
-        });
-      }
+      setTimeout(() => {
+        if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13 && this.eltnum.enh) {
+          this.$router
+            .push({
+              query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
+            })
+            .catch(err => {});
+        }
+      }, 700);
     },
 
     'wagner.sw': function() {
@@ -363,7 +369,7 @@ export default {
       if (this.$route.query.cs && init === 'cs') {
         return this.$route.query.cs === 'true';
       } else if (init === 'cs') {
-        return false;
+        return true;
       }
       if (this.$route.query.ch && init === 'ch') {
         return this.$route.query.ch === 'true';
@@ -388,17 +394,17 @@ export default {
       if (this.$route.query.sw && init === 'sw') {
         return this.$route.query.sw === 'true';
       } else if (init === 'sw') {
-        return false;
+        return true;
       }
       if (this.$route.query.sh && init === 'sh') {
         return this.$route.query.sh === 'true';
-      } else if (init === 'ch') {
-        return false;
+      } else if (init === 'sh') {
+        return true;
       }
       if (this.$route.query.az && init === 'az') {
         return this.$route.query.az === 'true';
       } else if (init === 'az') {
-        return false;
+        return true;
       }
     },
   },
