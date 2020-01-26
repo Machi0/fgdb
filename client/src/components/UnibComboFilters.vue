@@ -97,6 +97,7 @@
       <v-col cols="2" />
     </v-row>
 
+    {{ cs }}
     <v-row v-if="character == 'Wagner'" justify="center" class="mt-n6">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
@@ -218,7 +219,7 @@ export default {
       starter: this.initVars('str'),
       meter: this.initVars('mtr'),
       ch: this.initVars('ch'),
-      cs: this.initVars('cs'),
+      cs: true,
       success: false,
       filter: this.initVars('flt'),
       eltnum: {
@@ -238,6 +239,10 @@ export default {
         limit: value => (value >= 0 && value <= 13) || '0-13',
       },
     };
+  },
+
+  created() {
+    this.init();
   },
 
   watch: {
@@ -317,10 +322,6 @@ export default {
     },
   },
 
-  created() {
-    this.initVars();
-  },
-
   methods: {
     getStarters() {
       return this.starters[this.version][this.character];
@@ -335,6 +336,14 @@ export default {
 
     characterChange() {
       this.starter = 'All';
+    },
+
+    init() {
+      if (this.$route.query.cs) {
+        this.cs = this.$route.query.cs === 'true';
+      } else {
+        this.cs = true;
+      }
     },
 
     initVars(init) {

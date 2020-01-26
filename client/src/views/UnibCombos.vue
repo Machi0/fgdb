@@ -29,6 +29,7 @@ export default {
       this.$refs.get.path = this.$route.fullPath;
       this.$refs.get.page = this.$refs.get.initPage();
       this.$refs.get.getPosts();
+      this.$refs.filter.init();
     },
   },
 };
