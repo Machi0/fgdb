@@ -24,12 +24,6 @@ export default {
     this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
   },
 
-  watch: {
-    $route(to, from) {
-      this.$refs.get.path = this.$route.fullPath;
-      this.$refs.get.page = parseInt(this.$route.query.page) || 1;
-      this.$refs.get.getPosts();
-    },
-  },
+  watch: {},
 };
 </script>

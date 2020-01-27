@@ -166,7 +166,6 @@
         color="primary"
         @input="changePage()"
       />
-      {{ page }}
     </v-row>
   </v-container>
 </template>
@@ -187,6 +186,14 @@ export default {
 
   created() {
     this.getPosts();
+  },
+
+  watch: {
+    $route(to, from) {
+      this.path = this.$route.fullPath;
+      this.page = parseInt(this.$route.query.page) || 1;
+      this.getPosts();
+    },
   },
 
   methods: {

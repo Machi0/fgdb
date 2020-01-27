@@ -21,6 +21,7 @@
           label="Starter"
           item-color="secondary"
           color="secondary"
+          @change="starterChange()"
         />
         <v-select v-else disabled label="Starter" item-color="secondary" color="secondary" />
       </v-col>
@@ -31,6 +32,7 @@
           label="Version"
           item-color="secondary"
           color="secondary"
+          @change="versionChange()"
         />
       </v-col>
     </v-row>
@@ -44,6 +46,7 @@
           max="200"
           step="25"
           thumb-label
+          @end="meterChange()"
         />
       </v-col>
     </v-row>
@@ -56,6 +59,7 @@
           label="Position"
           item-color="secondary"
           color="secondary"
+          @change="posChange()"
         />
       </v-col>
       <v-col cols="6" md="2" sm="4" xl="1" class="text-center mx-xl-6 mb-n6">
@@ -97,7 +101,7 @@
       <v-col cols="2" />
     </v-row>
 
-    {{ cs }}
+    {{ ch }}
     <v-row v-if="character == 'Wagner'" justify="center" class="mt-n6">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
@@ -213,25 +217,25 @@ export default {
 
       starters: unibstarters.data(),
 
-      character: this.initVars('char'),
-      version: this.initVars('ver'),
-      pos: this.initVars('pos'),
-      starter: this.initVars('str'),
-      meter: this.initVars('mtr'),
-      ch: this.initVars('ch'),
-      cs: this.initVars('cs'),
+      character: this.$route.query.char || 'All',
+      version: this.$route.query.ver || 'ST',
+      pos: this.$route.query.pos || 'Midscreen',
+      starter: this.$route.query.str || 'All',
+      meter: [0, 200],
+      ch: false,
+      cs: true,
       success: false,
-      filter: this.initVars('flt'),
+      filter: this.$route.query.flt || 'Newest',
       eltnum: {
-        bullets: this.initVars('blt'),
-        enh: this.initVars('enh'),
+        bullets: parseInt(this.$route.query.blt) || 13,
+        enh: parseInt(this.$route.query.enh) || 13,
       },
       wagner: {
-        sw: this.initVars('sw'),
-        sh: this.initVars('sh'),
+        sw: true,
+        sh: true,
       },
       chaos: {
-        azhi: this.initVars('az'),
+        azhi: true,
       },
 
       rules: {
@@ -241,32 +245,17 @@ export default {
     };
   },
 
+  created() {
+    this.initVars();
+  },
+
   watch: {
-    character: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { char: this.character }) });
-    },
-
-    version: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { ver: this.version }) });
-    },
-
-    pos: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { pos: this.pos }) });
-    },
-
-    starter: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { str: this.starter }) });
-    },
-
-    meter: function() {
-      setTimeout(() => {
-        this.$router
-          .push({ query: Object.assign({}, this.$route.query, { mtr1: this.meter[0] }) })
-          .catch(err => {});
-        this.$router
-          .push({ query: Object.assign({}, this.$route.query, { mtr2: this.meter[1] }) })
-          .catch(err => {});
-      }, 700);
+    $route(to, from) {
+      this.character = this.$route.query.char || 'All';
+      this.version = this.$route.query.ver || 'ST';
+      this.pos = this.$route.query.pos || 'Midscreen';
+      this.starter = this.$route.query.str || 'All';
+      this.initVars();
     },
 
     ch: function() {
@@ -274,7 +263,6 @@ export default {
     },
 
     cs: function() {
-      console.log('fuck');
       this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
     },
 
@@ -333,76 +321,52 @@ export default {
 
     characterChange() {
       this.starter = 'All';
+      this.$router.push({ query: Object.assign({}, this.$route.query, { char: this.character }) });
     },
 
-    initVars(init) {
-      if (this.$route.query.char && init === 'char') {
-        return this.$route.query.char;
-      } else if (init === 'char') {
-        return 'All';
+    versionChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { ver: this.version }) });
+    },
+
+    posChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { pos: this.pos }) });
+    },
+
+    starterChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { str: this.starter }) });
+    },
+
+    meterChange() {
+      var a = Object.assign({}, this.$route.query, { mtr1: this.meter[0] });
+      a = Object.assign({}, a, { mtr2: this.meter[1] });
+      this.$router.push({ query: a }).catch(err => {});
+    },
+
+    initVars() {
+      if (this.$route.query.mtr1 && this.$route.query.mtr2) {
+        this.meter = [this.$route.query.mtr1, this.$route.query.mtr2];
+      } else {
+        this.meter = [0, 200];
       }
-      if (this.$route.query.ver && init === 'ver') {
-        return this.$route.query.ver;
-      } else if (init === 'ver') {
-        return 'ST';
+
+      if (this.$route.query.ch) {
+        this.ch = this.$route.query.ch === 'true';
       }
-      if (this.$route.query.pos && init === 'pos') {
-        return this.$route.query.pos;
-      } else if (init === 'pos') {
-        return 'Midscreen';
+
+      if (this.$route.query.cs) {
+        this.cs = this.$route.query.cs === 'true';
       }
-      if (this.$route.query.str && init === 'str') {
-        return this.$route.query.str;
-      } else if (init === 'str') {
-        return 'All';
+
+      if (this.$route.query.sw) {
+        this.wagner.sw = this.$route.query.sw === 'true';
       }
-      if (this.$route.query.mtr1 && this.$route.query.mtr2 && init === 'mtr') {
-        var meter = [];
-        meter[0] = parseInt(this.$route.query.mtr1);
-        meter[1] = parseInt(this.$route.query.mtr2);
-        return meter;
-      } else if (init === 'mtr') {
-        return [0, 200];
+
+      if (this.$route.query.sh) {
+        this.wagner.sh = this.$route.query.sh === 'true';
       }
-      if (this.$route.query.cs && init === 'cs') {
-        return this.$route.query.cs === 'true';
-      } else if (init === 'cs') {
-        return true;
-      }
-      if (this.$route.query.ch && init === 'ch') {
-        return this.$route.query.ch === 'true';
-      } else if (init === 'ch') {
-        return false;
-      }
-      if (this.$route.query.flt && init === 'flt') {
-        return this.$route.query.flt;
-      } else if (init === 'flt') {
-        return 'Newest';
-      }
-      if (this.$route.query.blt && init === 'blt') {
-        return parseInt(this.$route.query.blt);
-      } else if (init === 'blt') {
-        return 13;
-      }
-      if (this.$route.query.enh && init === 'enh') {
-        return parseInt(this.$route.query.enh);
-      } else if (init === 'enh') {
-        return 13;
-      }
-      if (this.$route.query.sw && init === 'sw') {
-        return this.$route.query.sw === 'true';
-      } else if (init === 'sw') {
-        return true;
-      }
-      if (this.$route.query.sh && init === 'sh') {
-        return this.$route.query.sh === 'true';
-      } else if (init === 'sh') {
-        return true;
-      }
-      if (this.$route.query.az && init === 'az') {
-        return this.$route.query.az === 'true';
-      } else if (init === 'az') {
-        return true;
+
+      if (this.$route.query.az) {
+        this.chaos.azhi = this.$route.query.az === 'true';
       }
     },
   },
