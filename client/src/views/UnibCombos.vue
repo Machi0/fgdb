@@ -27,9 +27,8 @@ export default {
   watch: {
     $route(to, from) {
       this.$refs.get.path = this.$route.fullPath;
-      this.$refs.get.page = this.$refs.get.initPage();
+      this.$refs.get.page = parseInt(this.$route.query.page) || 1;
       this.$refs.get.getPosts();
-      this.$refs.filter.init();
     },
   },
 };

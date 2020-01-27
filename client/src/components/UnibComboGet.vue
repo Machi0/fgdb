@@ -153,13 +153,20 @@
       </v-col>
       <v-col class="hidden-lg-and-down" cols="1" />
     </v-row>
-
     <v-row v-else justify="center" align="center">
       <v-progress-circular color="primary" indeterminate size="50" />
     </v-row>
 
     <v-row justify="center" class="mt-6">
-      <v-pagination circle v-model="page" :total-visible="8" :length="totalPages" color="primary" />
+      <v-pagination
+        circle
+        v-model="page"
+        :total-visible="8"
+        :length="totalPages"
+        color="primary"
+        @input="changePage()"
+      />
+      {{ page }}
     </v-row>
   </v-container>
 </template>
@@ -170,7 +177,7 @@ export default {
 
   data() {
     return {
-      page: this.initPage(),
+      page: parseInt(this.$route.query.page) || 1,
       totalPages: 1,
       posts: [],
       path: this.$route.fullPath,
@@ -180,12 +187,6 @@ export default {
 
   created() {
     this.getPosts();
-  },
-
-  watch: {
-    page: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { page: this.page }) });
-    },
   },
 
   methods: {
@@ -205,12 +206,8 @@ export default {
         .finally(() => (this.loading = false));
     },
 
-    initPage() {
-      if (this.$route.query.page) {
-        return parseInt(this.$route.query.page);
-      }
-
-      return 1;
+    changePage() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { page: this.page }) });
     },
   },
 };

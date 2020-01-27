@@ -219,7 +219,7 @@ export default {
       starter: this.initVars('str'),
       meter: this.initVars('mtr'),
       ch: this.initVars('ch'),
-      cs: true,
+      cs: this.initVars('cs'),
       success: false,
       filter: this.initVars('flt'),
       eltnum: {
@@ -239,10 +239,6 @@ export default {
         limit: value => (value >= 0 && value <= 13) || '0-13',
       },
     };
-  },
-
-  created() {
-    this.init();
   },
 
   watch: {
@@ -278,6 +274,7 @@ export default {
     },
 
     cs: function() {
+      console.log('fuck');
       this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
     },
 
@@ -336,14 +333,6 @@ export default {
 
     characterChange() {
       this.starter = 'All';
-    },
-
-    init() {
-      if (this.$route.query.cs) {
-        this.cs = this.$route.query.cs === 'true';
-      } else {
-        this.cs = true;
-      }
     },
 
     initVars(init) {
