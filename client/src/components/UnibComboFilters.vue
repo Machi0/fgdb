@@ -64,12 +64,18 @@
       </v-col>
       <v-col cols="6" md="2" sm="4" xl="1" class="text-center mx-xl-6 mb-n6">
         <v-row justify="center">
-          <v-checkbox v-model="cs" label="Vorpal" color="secondary" flat />
+          <v-checkbox v-model="cs" label="Vorpal" color="secondary" flat @change="csChange()" />
         </v-row>
       </v-col>
       <v-col md="2" xl="1" class="text-center">
         <v-row justify="center">
-          <v-checkbox v-model="ch" label="Counter Hit" color="secondary" flat />
+          <v-checkbox
+            v-model="ch"
+            label="Counter Hit"
+            color="secondary"
+            flat
+            @change="chChange()"
+          />
         </v-row>
       </v-col>
     </v-row>
@@ -101,7 +107,7 @@
       <v-col cols="2" />
     </v-row>
 
-    {{ ch }}
+    {{ cs }}
     <v-row v-if="character == 'Wagner'" justify="center" class="mt-n6">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
@@ -132,6 +138,7 @@
           label="Filter By"
           item-color="secondary"
           color="secondary"
+          @change="filterChange()"
         />
       </v-col>
       <v-col cols="1">
@@ -222,8 +229,8 @@ export default {
       pos: this.$route.query.pos || 'Midscreen',
       starter: this.$route.query.str || 'All',
       meter: [0, 200],
-      ch: false,
-      cs: true,
+      ch: JSON.parse(this.$route.query.ch || false),
+      cs: JSON.parse(this.$route.query.cs || true),
       success: false,
       filter: this.$route.query.flt || 'Newest',
       eltnum: {
@@ -231,11 +238,11 @@ export default {
         enh: parseInt(this.$route.query.enh) || 13,
       },
       wagner: {
-        sw: true,
-        sh: true,
+        sw: JSON.parse(this.$route.query.sw || true),
+        sh: JSON.parse(this.$route.query.sh || true),
       },
       chaos: {
-        azhi: true,
+        azhi: JSON.parse(this.$route.query.az || true),
       },
 
       rules: {
@@ -246,7 +253,7 @@ export default {
   },
 
   created() {
-    this.initVars();
+    this.meterInit();
   },
 
   watch: {
@@ -255,19 +262,10 @@ export default {
       this.version = this.$route.query.ver || 'ST';
       this.pos = this.$route.query.pos || 'Midscreen';
       this.starter = this.$route.query.str || 'All';
-      this.initVars();
-    },
-
-    ch: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { ch: this.ch }) });
-    },
-
-    cs: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
-    },
-
-    filter: function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { flt: this.filter }) });
+      this.filter = this.$route.query.flt || 'Newest';
+      this.meterInit();
+      this.ch = JSON.parse(this.$route.query.ch || false);
+      this.cs = JSON.parse(this.$route.query.cs || false) || this.$route.query.cs == undefined;
     },
 
     'eltnum.bullets': function() {
@@ -336,37 +334,29 @@ export default {
       this.$router.push({ query: Object.assign({}, this.$route.query, { str: this.starter }) });
     },
 
+    filterChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { flt: this.filter }) });
+    },
+
     meterChange() {
       var a = Object.assign({}, this.$route.query, { mtr1: this.meter[0] });
       a = Object.assign({}, a, { mtr2: this.meter[1] });
       this.$router.push({ query: a }).catch(err => {});
     },
 
-    initVars() {
+    chChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { ch: this.ch }) });
+    },
+
+    csChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
+    },
+
+    meterInit() {
       if (this.$route.query.mtr1 && this.$route.query.mtr2) {
         this.meter = [this.$route.query.mtr1, this.$route.query.mtr2];
       } else {
         this.meter = [0, 200];
-      }
-
-      if (this.$route.query.ch) {
-        this.ch = this.$route.query.ch === 'true';
-      }
-
-      if (this.$route.query.cs) {
-        this.cs = this.$route.query.cs === 'true';
-      }
-
-      if (this.$route.query.sw) {
-        this.wagner.sw = this.$route.query.sw === 'true';
-      }
-
-      if (this.$route.query.sh) {
-        this.wagner.sh = this.$route.query.sh === 'true';
-      }
-
-      if (this.$route.query.az) {
-        this.chaos.azhi = this.$route.query.az === 'true';
       }
     },
   },
