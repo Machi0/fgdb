@@ -310,44 +310,65 @@ export default {
 
     characterChange() {
       this.starter = 'All';
-      this.$router.push({ query: Object.assign({}, this.$route.query, { char: this.character }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { char: this.character }, { page: undefined }),
+      });
+      this.$emit('pageReset');
     },
 
     versionChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { ver: this.version }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { ver: this.version }, { page: undefined }),
+      });
     },
 
     posChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { pos: this.pos }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { pos: this.pos }, { page: undefined }),
+      });
     },
 
     starterChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { str: this.starter }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { str: this.starter }, { page: undefined }),
+      });
     },
 
     filterChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { flt: this.filter }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { flt: this.filter }, { page: undefined }),
+      });
     },
 
     meterChange() {
       var a = Object.assign({}, this.$route.query, { mtr1: this.meter[0] });
       a = Object.assign({}, a, { mtr2: this.meter[1] });
+      a = Object.assign({}, a, { page: undefined });
       this.$router.push({ query: a }).catch(err => {});
     },
 
     chChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { ch: this.ch }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { ch: this.ch }, { page: undefined }),
+      });
     },
 
     csChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { cs: this.cs }, { page: undefined }),
+      });
     },
 
     bltChange() {
       if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13 && this.eltnum.bullets) {
         this.$router
           .push({
-            query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
+            query: Object.assign(
+              {},
+              this.$route.query,
+              { blt: this.eltnum.bullets },
+              { page: undefined }
+            ),
           })
           .catch(err => {});
       }
@@ -357,22 +378,33 @@ export default {
       if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13 && this.eltnum.enh) {
         this.$router
           .push({
-            query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
+            query: Object.assign(
+              {},
+              this.$route.query,
+              { enh: this.eltnum.enh },
+              { page: undefined }
+            ),
           })
           .catch(err => {});
       }
     },
 
     swChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { sw: this.wagner.sw }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { sw: this.wagner.sw }, { page: undefined }),
+      });
     },
 
     shChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { sh: this.wagner.sh }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { sh: this.wagner.sh }, { page: undefined }),
+      });
     },
 
     azhiChange() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }) });
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }, { page: undefined }),
+      });
     },
 
     meterInit() {

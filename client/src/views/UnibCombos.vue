@@ -23,7 +23,5 @@ export default {
     this.$vuetify.theme.themes.dark.primary = '#5E35B1';
     this.$vuetify.theme.themes.dark.secondary = '#7E57C2';
   },
-
-  watch: {},
 };
 </script>
