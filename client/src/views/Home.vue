@@ -15,7 +15,7 @@ export default {
   },
 
   created() {
-    this.$vuetify.theme.themes.dark.primary = '#3949AB';
+    this.$vuetify.theme.themes.dark.primary = '#B71C1C';
   },
 };
 </script>
