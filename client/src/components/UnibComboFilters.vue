@@ -91,6 +91,7 @@
           maxlength="2"
           placeholder=" "
           dense
+          @blur="bltChange()"
         />
       </v-col>
       <v-col md="1">
@@ -102,29 +103,47 @@
           maxlength="2"
           placeholder=" "
           dense
+          @blur="enhChange()"
         />
       </v-col>
       <v-col cols="2" />
     </v-row>
 
-    {{ cs }}
-    <v-row v-if="character == 'Wagner'" justify="center" class="mt-n6">
+    <v-row v-if="character == 'Wagner'" justify="center" class="mt-n12">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
-          <v-checkbox v-model="wagner.sw" label="Sword Install" color="secondary" flat />
+          <v-checkbox
+            v-model="wagner.sw"
+            label="Sword Install"
+            color="secondary"
+            flat
+            @change="swChange()"
+          />
         </v-row>
       </v-col>
       <v-col md="2" class="text-center ml-xl-n12">
         <v-row justify="center">
-          <v-checkbox v-model="wagner.sh" label="Shield Install" color="secondary" flat />
+          <v-checkbox
+            v-model="wagner.sh"
+            label="Shield Install"
+            color="secondary"
+            flat
+            @change="shChange()"
+          />
         </v-row>
       </v-col>
     </v-row>
 
-    <v-row v-if="character == 'Chaos'" justify="center" class="mt-n6">
+    <v-row v-if="character == 'Chaos'" justify="center" class="mt-n12">
       <v-col md="2" class="text-center">
         <v-row justify="center">
-          <v-checkbox v-model="chaos.azhi" label="Azhi" color="secondary" flat />
+          <v-checkbox
+            v-model="chaos.azhi"
+            label="Azhi"
+            color="secondary"
+            flat
+            @change="azhiChange()"
+          />
         </v-row>
       </v-col>
     </v-row>
@@ -266,42 +285,14 @@ export default {
       this.meterInit();
       this.ch = JSON.parse(this.$route.query.ch || false);
       this.cs = JSON.parse(this.$route.query.cs || false) || this.$route.query.cs == undefined;
-    },
-
-    'eltnum.bullets': function() {
-      setTimeout(() => {
-        if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13 && this.eltnum.bullets) {
-          this.$router
-            .push({
-              query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
-            })
-            .catch(err => {});
-        }
-      }, 700);
-    },
-
-    'eltnum.enh': function() {
-      setTimeout(() => {
-        if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13 && this.eltnum.enh) {
-          this.$router
-            .push({
-              query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
-            })
-            .catch(err => {});
-        }
-      }, 700);
-    },
-
-    'wagner.sw': function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { sw: this.wagner.sw }) });
-    },
-
-    'wagner.sh': function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { sh: this.wagner.sh }) });
-    },
-
-    'chaos.azhi': function() {
-      this.$router.push({ query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }) });
+      this.eltnum.bullets = parseInt(this.$route.query.blt) || 13;
+      this.eltnum.enh = parseInt(this.$route.query.enh) || 13;
+      this.wagner.sw =
+        JSON.parse(this.$route.query.sw || false) || this.$route.query.sw == undefined;
+      this.wagner.sh =
+        JSON.parse(this.$route.query.sh || false) || this.$route.query.sh == undefined;
+      this.chaos.azhi =
+        JSON.parse(this.$route.query.az || false) || this.$route.query.az == undefined;
     },
   },
 
@@ -350,6 +341,38 @@ export default {
 
     csChange() {
       this.$router.push({ query: Object.assign({}, this.$route.query, { cs: this.cs }) });
+    },
+
+    bltChange() {
+      if (this.eltnum.bullets >= 0 && this.eltnum.bullets <= 13 && this.eltnum.bullets) {
+        this.$router
+          .push({
+            query: Object.assign({}, this.$route.query, { blt: this.eltnum.bullets }),
+          })
+          .catch(err => {});
+      }
+    },
+
+    enhChange() {
+      if (this.eltnum.enh >= 0 && this.eltnum.enh <= 13 && this.eltnum.enh) {
+        this.$router
+          .push({
+            query: Object.assign({}, this.$route.query, { enh: this.eltnum.enh }),
+          })
+          .catch(err => {});
+      }
+    },
+
+    swChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { sw: this.wagner.sw }) });
+    },
+
+    shChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { sh: this.wagner.sh }) });
+    },
+
+    azhiChange() {
+      this.$router.push({ query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }) });
     },
 
     meterInit() {
