@@ -28,7 +28,7 @@
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
-              <flagpost />
+              <flagpost :id="post.id" />
             </v-card-title>
             <v-divider />
             <v-card-text>
@@ -147,6 +147,7 @@
                   <div>Notes: {{ post.desc }}</div>
                 </v-col>
               </v-row>
+              {{ post.flag }}
             </v-card-text>
           </v-card>
         </v-row>

@@ -54,6 +54,10 @@
 export default {
   name: 'flagpost',
 
+  props: {
+    id: Number,
+  },
+
   data() {
     return {
       active: false,
@@ -69,15 +73,12 @@ export default {
       this.loading = true;
 
       this.$http
-        .put(this.path, { timeout: 30000 })
+        .put(this.path, { id: this.id, flag: this.reason }, { timeout: 30000 })
         .then(response => {
           this.$emit('success');
-          console.log(response);
         })
         .catch(error => {
           this.badtime = true;
-          console.log(error);
-          console.log(error.response);
         })
         .finally(() => (this.loading = false));
     },

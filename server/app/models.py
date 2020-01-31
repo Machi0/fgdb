@@ -51,7 +51,8 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
             'ch': self.ch,
             'pos': self.pos,
             'starter': self.starter,
-            'meter': self.meter
+            'meter': self.meter,
+            'flag': self.flag
         }
 
         if self.character == "Eltnum":

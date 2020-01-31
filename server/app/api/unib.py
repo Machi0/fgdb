@@ -39,3 +39,18 @@ def post_combo():
     response = jsonify(combo.to_dict())
     response.status_code = 201
     return response
+
+@bp.route('unib/combos/', methods=['PUT'])
+def flag_combo():
+    data = request.get_json() or {}
+    combo = UnibCombos()
+    print(UnibCombos.query.get(data['id']).flag)
+
+    setattr(UnibCombos.query.get(data['id']), 'flag', data['flag'])
+    print(UnibCombos.query.get(data['id']).flag)
+
+    db.session.commit()
+
+    response = jsonify({})
+    response.status_code = 201
+    return response
