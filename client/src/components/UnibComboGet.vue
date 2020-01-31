@@ -28,7 +28,7 @@
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
-              <v-icon size="30" color="grey darken-1">mdi-flag</v-icon>
+              <flagpost />
             </v-card-title>
             <v-divider />
             <v-card-text>
@@ -171,9 +171,14 @@
 </template>
 
 <script>
+import flagpost from '@/components/FlagPost.vue';
+
 export default {
   name: 'getcombos',
 
+  components: {
+    flagpost,
+  },
   data() {
     return {
       page: parseInt(this.$route.query.page) || 1,

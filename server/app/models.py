@@ -39,6 +39,7 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
 
     notation = db.Column(db.String(140))
     desc = db.Column(db.String(140))
+    flag = db.Column(db.String(140))
 
     def to_dict(self):
         data = {

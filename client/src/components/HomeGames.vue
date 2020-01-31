@@ -2,7 +2,7 @@
   <v-container px-12>
     <v-row justify="center">
       <v-col>
-        <div class="title font-weight-bold">GAMES</div>
+        <div class="headline font-weight-bold">GAMES</div>
         <v-divider class="mb-3 mt-1 white" />
         <v-row>
           <v-spacer class="hidden-sm-and-up" />
