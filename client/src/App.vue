@@ -7,6 +7,15 @@
         <router-view />
       </v-container>
     </v-content>
+
+    <v-footer>
+      <v-spacer />
+      <div class="overline font-weight-bold primary--text">
+        Contact:
+        <a href="mailto:setzerfgdb@gmail.com" style="text-decoration: none">setzerfgdb@gmail.com</a>
+      </div>
+      <v-spacer />
+    </v-footer>
   </v-app>
 </template>
 
