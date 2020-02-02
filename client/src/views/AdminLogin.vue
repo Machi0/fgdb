@@ -21,11 +21,11 @@ export default {
       this.$http
         .post(this.path, { username: this.username, password: this.password }, { timeout: 30000 })
         .then(response => {
-          console.log(response.data);
+          if (response.data.auth == 'true') {
+            this.$router.push('/admin/');
+          }
         })
-        .catch(error => {
-          console.error(error);
-        });
+        .catch(error => {});
     },
   },
 };

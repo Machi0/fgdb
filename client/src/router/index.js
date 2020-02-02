@@ -28,7 +28,8 @@ const routes = [
     name: 'admin',
     component: Admin,
     beforeEnter(to, from, next) {
-      if (true) {
+      console.log(from);
+      if (from.name == 'login') {
         next();
       } else {
         next({
