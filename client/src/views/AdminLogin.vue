@@ -19,7 +19,12 @@ export default {
   methods: {
     validate() {
       this.$http
-        .post(this.path, { username: this.username, password: this.password }, { timeout: 30000 })
+        .post(
+          this.path,
+          {},
+          { auth: { username: this.username, password: this.password } },
+          { timeout: 30000 }
+        )
         .then(response => {
           if (response.data.auth == 'true') {
             this.$router.push('/admin/');
