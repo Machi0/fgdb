@@ -5,6 +5,7 @@ from flask import jsonify, request, g
 from flask_httpauth import HTTPBasicAuth
 from app.api.errors import error_response
 from flask_httpauth import HTTPTokenAuth
+from app.models import UnibCombos
 
 
 
@@ -13,7 +14,6 @@ token_auth = HTTPTokenAuth()
 
 @basic_auth.verify_password
 def verify_password(username, password):
-    print(username)
     user = Admin.query.filter_by(username=username).first()
     if user is None:
         return False
@@ -26,6 +26,7 @@ def basic_auth_error():
 
 @token_auth.verify_token
 def verify_token(token):
+    print(token)
     g.current_user = Admin.check_token(token) if token else None
     return g.current_user is not None
 
@@ -36,9 +37,19 @@ def token_auth_error():
 @bp.route('/matrix/', methods=['POST'])
 @basic_auth.login_required
 def checkCreds():
-    return jsonify({'auth': 'true'})    
+    token = g.current_user.get_token()
+    db.session.commit()
+    return jsonify({'token': token, 'auth': 'true'})    
 
 @bp.route('/admin/', methods=['DELETE'])
-@token_auth.login_required
 def deletePost():
     pass
+
+@bp.route('/admin/', methods=['GET'])
+@token_auth.login_required
+def getPosts():
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 24, type=int), 100)
+    query = UnibCombos.get_query(UnibCombos)
+    data = UnibCombos.to_collection_dict(query, page, per_page, 'api.unib.get_combo')
+    return jsonify(data)

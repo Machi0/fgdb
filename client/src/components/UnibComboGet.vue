@@ -158,7 +158,6 @@
                   <div>Notes: {{ post.desc }}</div>
                 </v-col>
               </v-row>
-              {{ post.flag }}
             </v-card-text>
           </v-card>
         </v-row>

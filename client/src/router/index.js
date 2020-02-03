@@ -27,9 +27,9 @@ const routes = [
     path: '/admin/',
     name: 'admin',
     component: Admin,
+    props: true,
     beforeEnter(to, from, next) {
-      console.log(from);
-      if (from.name == 'login') {
+      if (from.name == 'login' || performance.navigation.type == 1) {
         next();
       } else {
         next({

@@ -27,7 +27,7 @@ export default {
         )
         .then(response => {
           if (response.data.auth == 'true') {
-            this.$router.push('/admin/');
+            this.$router.push({ name: 'admin', params: { token: response.data.token } });
           }
         })
         .catch(error => {});
