@@ -26,5 +26,9 @@ export default {
   components: {
     navbar,
   },
+
+  created() {
+    document.title = 'GRD BREAK';
+  },
 };
 </script>

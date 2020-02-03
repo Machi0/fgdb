@@ -1,6 +1,7 @@
 <template>
   <v-container px-12>
     <v-row justify="center">
+      <v-col class="hidden-lg-and-down" cols="2" />
       <v-col>
         <div class="headline font-weight-bold">GAMES</div>
         <v-divider class="mb-3 mt-1 white" />
@@ -14,6 +15,7 @@
           <v-spacer class="hidden-sm-and-up" />
         </v-row>
       </v-col>
+      <v-col class="hidden-lg-and-down" cols="2" />
     </v-row>
   </v-container>
 </template>
