@@ -21,10 +21,21 @@
                 eager
               />
               <v-spacer />
-              <a v-if="'tw' in post" :href="post.tw" style="text-decoration: none">
+              <a
+                v-if="'tw' in post"
+                :href="post.tw"
+                style="text-decoration: none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <v-icon color="blue" size="30">mdi-twitter</v-icon>
               </a>
-              <a v-else :href="post.yt" style="text-decoration: none"
+              <a
+                v-else
+                :href="post.yt"
+                style="text-decoration: none"
+                target="_blank"
+                rel="noopener noreferrer"
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
