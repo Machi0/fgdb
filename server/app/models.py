@@ -54,6 +54,16 @@ class Admin(db.Model):
             return None
         return user
 
+    def get_query(self):
+        query = UnibCombos.get_query(self);
+
+        if request.args.get('flag') is not None and request.args.get('flag') == 'true':
+            query = query.filter(self.flag.isnot(None))
+
+        query = query.order_by(self.id.desc())
+        
+        return query
+
 class UnibCombos(PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True) 
 

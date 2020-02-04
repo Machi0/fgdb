@@ -1,5 +1,6 @@
 <template>
   <v-container px-12>
+    <v-checkbox v-model="flag" label="Flag" @change="flagChange()" />
     <v-row v-if="loading === false" justify="center">
       <v-col class="hidden-lg-and-down" cols="1" />
       <v-col>
@@ -39,6 +40,12 @@
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
+              <v-icon size="25" color="grey darken-1">
+                mdi-pencil
+              </v-icon>
+              <v-icon size="25" color="grey darken-1" class="ml-3">
+                mdi-delete
+              </v-icon>
             </v-card-title>
             <v-divider />
             <v-card-text>
@@ -194,6 +201,8 @@ export default {
       posts: [],
       path: '/admin/',
       loading: true,
+      nToken: this.token,
+      flag: false,
     };
   },
 
@@ -203,8 +212,9 @@ export default {
 
   watch: {
     $route(to, from) {
-      this.path = this.$route.fullPath;
       this.page = parseInt(this.$route.query.page) || 1;
+      this.flag = JSON.parse(this.$route.query.flag || false);
+      this.path = '/admin/?page=' + this.page + '&flag=' + this.flag;
       this.getPosts();
     },
   },
@@ -212,13 +222,13 @@ export default {
   methods: {
     getPosts() {
       this.loading = true;
-      console.log(this.path);
+      console.log(this.nToken);
 
       this.$http
         .get(this.path, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + this.token,
+            Authorization: 'Bearer ' + this.nToken,
           },
         })
         .then(response => {
@@ -234,6 +244,12 @@ export default {
 
     changePage() {
       this.$router.push({ query: Object.assign({}, this.$route.query, { page: this.page }) });
+    },
+
+    flagChange() {
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, { flag: this.flag }, { page: undefined }),
+      });
     },
   },
 };
