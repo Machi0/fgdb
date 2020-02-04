@@ -43,9 +43,16 @@
               <v-icon size="25" color="grey darken-1">
                 mdi-pencil
               </v-icon>
-              <v-icon size="25" color="grey darken-1" class="ml-3" @click="deletePost(post.id)">
-                mdi-delete
-              </v-icon>
+              <v-dialog max-width="200">
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on" size="25" color="grey darken-1" class="ml-3">
+                    mdi-delete
+                  </v-icon>
+                </template>
+                <v-card class="text-center">
+                  <v-btn @click="deletePost(post.id)" color="red darken-4" />
+                </v-card>
+              </v-dialog>
             </v-card-title>
             <v-divider />
             <v-card-text>
