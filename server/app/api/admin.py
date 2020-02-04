@@ -26,7 +26,6 @@ def basic_auth_error():
 
 @token_auth.verify_token
 def verify_token(token):
-    print(token)
     g.current_user = Admin.check_token(token) if token else None
     return g.current_user is not None
 
@@ -41,9 +40,15 @@ def checkCreds():
     db.session.commit()
     return jsonify({'token': token, 'auth': 'true'})    
 
-@bp.route('/admin/', methods=['DELETE'])
-def deletePost():
-    pass
+@bp.route('/admin/<post_id>', methods=['DELETE'])
+@token_auth.login_required
+def deletePost(post_id):
+    UnibCombos.query.filter_by(id=post_id).delete()
+    db.session.commit()
+
+    response = jsonify({})
+    response.status_code = 201
+    return response
 
 @bp.route('/admin/', methods=['GET'])
 @token_auth.login_required

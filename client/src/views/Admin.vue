@@ -1,6 +1,6 @@
 <template>
   <v-container px-12>
-    <v-checkbox v-model="flag" label="Flag" @change="flagChange()" />
+    <v-checkbox v-model="flag" label="Flagged Posts" @change="flagChange()" />
     <v-row v-if="loading === false" justify="center">
       <v-col class="hidden-lg-and-down" cols="1" />
       <v-col>
@@ -43,7 +43,7 @@
               <v-icon size="25" color="grey darken-1">
                 mdi-pencil
               </v-icon>
-              <v-icon size="25" color="grey darken-1" class="ml-3">
+              <v-icon size="25" color="grey darken-1" class="ml-3" @click="deletePost(post.id)">
                 mdi-delete
               </v-icon>
             </v-card-title>
@@ -164,7 +164,9 @@
                   <div>Notes: {{ post.desc }}</div>
                 </v-col>
               </v-row>
-              {{ post.flag }}
+              <v-row justify="center">
+                <div>{{ post.flag }}</div>
+              </v-row>
             </v-card-text>
           </v-card>
         </v-row>
@@ -222,12 +224,10 @@ export default {
   methods: {
     getPosts() {
       this.loading = true;
-      console.log(this.nToken);
 
       this.$http
         .get(this.path, {
           headers: {
-            'Content-Type': 'application/json',
             Authorization: 'Bearer ' + this.nToken,
           },
         })
@@ -235,6 +235,24 @@ export default {
           console.log(response.data.items);
           this.totalPages = response.data._meta.total_pages;
           this.posts = response.data.items;
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        .finally(() => (this.loading = false));
+    },
+
+    deletePost(id) {
+      this.loading = true;
+
+      this.$http
+        .delete('/admin/' + id, {
+          headers: {
+            Authorization: 'Bearer ' + this.nToken,
+          },
+        })
+        .then(response => {
+          this.getPosts();
         })
         .catch(error => {
           console.error(error);
