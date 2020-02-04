@@ -49,8 +49,10 @@
                     mdi-delete
                   </v-icon>
                 </template>
-                <v-card class="text-center">
-                  <v-btn @click="deletePost(post.id)" color="red darken-4" />
+                <v-card height="72">
+                  <v-card-text class="text-center">
+                    <v-btn @click="deletePost(post.id)" color="red darken-4" class="mt-4" />
+                  </v-card-text>
                 </v-card>
               </v-dialog>
             </v-card-title>
