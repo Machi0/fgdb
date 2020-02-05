@@ -26,6 +26,12 @@
                     class="mt-4"
                   />
                   <v-radio color="secondary" label="Broken Link" value="Broken" class="mt-4" />
+                  <v-radio
+                    color="secondary"
+                    label="Duplicate Post"
+                    value="Duplicate"
+                    class="mt-4"
+                  />
                 </v-radio-group>
               </v-col>
             </v-row>
