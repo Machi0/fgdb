@@ -55,7 +55,7 @@ class Admin(db.Model):
         return user
 
     def get_query(self):
-        query = UnibCombos.get_query(self);
+        query = UnibCombos.query
 
         if request.args.get('flag') is not None and request.args.get('flag') == 'true':
             query = query.filter(self.flag.isnot(None))
