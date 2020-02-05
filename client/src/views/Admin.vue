@@ -283,14 +283,14 @@ export default {
     },
 
     initEdit(id) {
-      this.edit = '{ id: ' + id + ', }';
+      this.edit = '{ "id": "' + id + '", }';
     },
 
     editPost() {
       this.loading = true;
 
       this.$http
-        .put('/admin/', this.edit, {
+        .put('/admin/', JSON.parse(this.edit), {
           headers: {
             Authorization: 'Bearer ' + this.nToken,
           },

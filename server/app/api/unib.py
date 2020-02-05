@@ -44,10 +44,8 @@ def post_combo():
 def flag_combo():
     data = request.get_json() or {}
     combo = UnibCombos()
-    print(UnibCombos.query.get(data['id']).flag)
 
     setattr(UnibCombos.query.get(data['id']), 'flag', data['flag'])
-    print(UnibCombos.query.get(data['id']).flag)
 
     db.session.commit()
 

@@ -64,6 +64,20 @@ class Admin(db.Model):
         
         return query
 
+    def edit(self, data):
+        fields = [
+            'character', 'ver', 'damage', 'cs', 'ch',
+            'starter', 'meter', 'pos', 'yt', 'tw', 'bullets',
+            'enh', 'wSword', 'wShield', 'azhi', 'notation', 'desc',
+            'flag' 
+        ]
+
+        for field in fields:
+            if field in data:
+                setattr(UnibCombos.query.get(data['id']), field, data[field])
+
+
+
 class UnibCombos(PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True) 
 

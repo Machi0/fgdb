@@ -50,6 +50,18 @@ def deletePost(post_id):
     response.status_code = 201
     return response
 
+@bp.route('/admin/', methods=['PUT'])
+@token_auth.login_required
+def editPost():
+    data = request.get_json() or {}
+    Admin.edit(UnibCombos, data)
+
+    db.session.commit()
+
+    response = jsonify({})
+    response.status_code = 201
+    return response
+
 @bp.route('/admin/', methods=['GET'])
 @token_auth.login_required
 def getPosts():
