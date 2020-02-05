@@ -40,9 +40,20 @@
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
-              <v-icon size="25" color="grey darken-1">
-                mdi-pencil
-              </v-icon>
+              <v-dialog max-width="500">
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on" @click="initEdit(post.id)" size="25" color="grey darken-1">
+                    mdi-pencil
+                  </v-icon>
+                </template>
+                <v-card height="500">
+                  <v-card-text class="text-center">
+                    <v-textarea v-model="edit" />
+                    <v-btn @click="editPost()" class="mt-2" />
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
+
               <v-dialog max-width="200">
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on" size="25" color="grey darken-1" class="ml-3">
@@ -56,6 +67,7 @@
                 </v-card>
               </v-dialog>
             </v-card-title>
+
             <v-divider />
             <v-card-text>
               <v-row>
@@ -214,6 +226,7 @@ export default {
       loading: true,
       nToken: this.token,
       flag: false,
+      edit: '',
     };
   },
 
@@ -267,6 +280,31 @@ export default {
           console.error(error);
         })
         .finally(() => (this.loading = false));
+    },
+
+    initEdit(id) {
+      this.edit = '{ id: ' + id + ', }';
+    },
+
+    editPost() {
+      this.loading = true;
+
+      this.$http
+        .put('/admin/', this.edit, {
+          headers: {
+            Authorization: 'Bearer ' + this.nToken,
+          },
+        })
+        .then(response => {
+          this.getPosts();
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        .finally(() => {
+          this.loading = false;
+          this.edit = '';
+        });
     },
 
     changePage() {
