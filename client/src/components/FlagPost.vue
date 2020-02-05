@@ -52,6 +52,13 @@
           </v-container>
         </v-card-text>
       </v-card>
+
+      <v-snackbar v-model="badtime" :timeout="5000" top>
+        Error reporting flag
+        <v-icon @click="badtime = false" color="error" small>
+          mdi-close
+        </v-icon>
+      </v-snackbar>
     </v-dialog>
   </div>
 </template>
@@ -82,11 +89,14 @@ export default {
         .put(this.path, { id: this.id, flag: this.reason }, { timeout: 30000 })
         .then(response => {
           this.$emit('success');
+          this.active = false;
         })
         .catch(error => {
           this.badtime = true;
         })
-        .finally(() => (this.loading = false));
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };

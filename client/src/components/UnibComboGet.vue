@@ -39,7 +39,7 @@
                 ><v-icon color="red darken-1" size="30">mdi-youtube</v-icon>
               </a>
               <v-spacer />
-              <flagpost :id="post.id" />
+              <flagpost :id="post.id" v-on:success="success = true" />
             </v-card-title>
             <v-divider />
             <v-card-text>
@@ -178,6 +178,13 @@
         @input="changePage()"
       />
     </v-row>
+
+    <v-snackbar v-model="success" :timeout="5000" top>
+      Flag reported
+      <v-icon @click="success = false" color="error" small>
+        mdi-close
+      </v-icon>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -197,6 +204,7 @@ export default {
       posts: [],
       path: this.$route.fullPath,
       loading: true,
+      success: false,
     };
   },
 
