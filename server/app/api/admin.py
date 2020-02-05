@@ -6,6 +6,7 @@ from flask_httpauth import HTTPBasicAuth
 from app.api.errors import error_response
 from flask_httpauth import HTTPTokenAuth
 from app.models import UnibCombos
+from app import limiter
 
 
 
@@ -35,6 +36,7 @@ def token_auth_error():
 
 @bp.route('/matrix/', methods=['POST'])
 @basic_auth.login_required
+@limiter.exempt
 def checkCreds():
     token = g.current_user.get_token()
     db.session.commit()
@@ -42,6 +44,7 @@ def checkCreds():
 
 @bp.route('/admin/<post_id>', methods=['DELETE'])
 @token_auth.login_required
+@limiter.exempt
 def deletePost(post_id):
     UnibCombos.query.filter_by(id=post_id).delete()
     db.session.commit()
@@ -52,6 +55,7 @@ def deletePost(post_id):
 
 @bp.route('/admin/', methods=['PUT'])
 @token_auth.login_required
+@limiter.exempt
 def editPost():
     data = request.get_json() or {}
     Admin.edit(UnibCombos, data)
@@ -64,6 +68,7 @@ def editPost():
 
 @bp.route('/admin/', methods=['GET'])
 @token_auth.login_required
+@limiter.exempt
 def getPosts():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 24, type=int), 100)

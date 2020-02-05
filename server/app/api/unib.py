@@ -3,8 +3,10 @@ from flask import jsonify, request
 from app.models import UnibCombos
 from app import db
 from app.api.errors import bad_request
+from app import limiter
 
 @bp.route('/unib/combos/', methods=['GET'])
+@limiter.exempt
 def get_combo():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 24, type=int), 100)
