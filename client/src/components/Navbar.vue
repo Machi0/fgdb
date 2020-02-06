@@ -7,7 +7,7 @@
             src="@/assets/53454.png"
             alt="FGDB Logo"
             contain
-            max-width="43"
+            max-width="44"
             :class="{ 'on-hover': hover }"
             class="ml-4"
           />

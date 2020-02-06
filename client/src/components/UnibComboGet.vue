@@ -227,13 +227,10 @@ export default {
       this.$http
         .get(this.path)
         .then(response => {
-          console.log(response.data.items);
           this.totalPages = response.data._meta.total_pages;
           this.posts = response.data.items;
         })
-        .catch(error => {
-          console.error(error);
-        })
+        .catch(error => {})
         .finally(() => (this.loading = false));
     },
 

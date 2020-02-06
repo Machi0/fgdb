@@ -454,8 +454,6 @@ export default {
         payload.desc = this.desc;
       }
 
-      console.log(payload);
-
       return payload;
     },
 
@@ -468,12 +466,9 @@ export default {
           this.$emit('close', false);
           this.$emit('success');
           this.reset();
-          console.log(response);
         })
         .catch(error => {
           this.badtime = true;
-          console.log(error);
-          console.log(error.response);
         })
         .finally(() => (this.loading = false));
     },

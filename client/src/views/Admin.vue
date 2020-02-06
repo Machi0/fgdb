@@ -254,13 +254,10 @@ export default {
           },
         })
         .then(response => {
-          console.log(response.data.items);
           this.totalPages = response.data._meta.total_pages;
           this.posts = response.data.items;
         })
-        .catch(error => {
-          console.error(error);
-        })
+        .catch(error => {})
         .finally(() => (this.loading = false));
     },
 
@@ -276,9 +273,7 @@ export default {
         .then(response => {
           this.getPosts();
         })
-        .catch(error => {
-          console.error(error);
-        })
+        .catch(error => {})
         .finally(() => (this.loading = false));
     },
 
@@ -298,9 +293,7 @@ export default {
         .then(response => {
           this.getPosts();
         })
-        .catch(error => {
-          console.error(error);
-        })
+        .catch(error => {})
         .finally(() => {
           this.loading = false;
           this.edit = '';

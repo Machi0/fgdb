@@ -18,7 +18,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     #Change to domain
-    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+    cors.init_app(app, resources={r"/api/*": {"origins": "http://localhost:8080"}})
     limiter.init_app(app)
 
     from app.api import bp as api_bp
