@@ -14,6 +14,10 @@ const routes = [
     component: Home,
   },
   {
+    path: '/api*',
+    redirect: { name: 'home' },
+  },
+  {
     path: '/unib/combos',
     name: 'unib combos',
     component: UnibCombos,
