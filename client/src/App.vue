@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background:#303030">
+  <v-app>
     <navbar />
 
     <v-content>
@@ -32,3 +32,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import '@/styles/variables.scss';
+
+.custom-class {
+  border-radius: $border-radius-root;
+}
+</style>
