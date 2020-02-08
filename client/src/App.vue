@@ -8,7 +8,7 @@
       </v-container>
     </v-content>
 
-    <v-footer>
+    <v-footer color="#212121">
       <v-spacer />
       <div class="overline font-weight-bold primary--text">
         Contact:
