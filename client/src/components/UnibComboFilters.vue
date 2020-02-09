@@ -109,7 +109,7 @@
       <v-col cols="2" />
     </v-row>
 
-    <v-row v-if="character == 'Wagner'" justify="center" class="mt-n12">
+    <v-row v-if="character == 'Wagner'" justify="center" class="mt-n8">
       <v-col md="2" class="text-center mr-xl-n12">
         <v-row justify="center">
           <v-checkbox
@@ -134,7 +134,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="character == 'Chaos'" justify="center" class="mt-n12">
+    <v-row v-if="character == 'Chaos'" justify="center" class="mt-n8">
       <v-col md="2" class="text-center">
         <v-row justify="center">
           <v-checkbox
