@@ -10,7 +10,7 @@
             outlined
             tile
             width="290"
-            class="mx-10 mb-12"
+            class="mx-sm-10 mb-12"
           >
             <v-card-title class="my-n2">
               <v-img
@@ -83,7 +83,7 @@
                 <v-col>
                   <div>Counter Hit:</div>
                 </v-col>
-                <v-spacer />
+                <v-spacer class="ml-n12" />
                 <v-col class="text-end">
                   <v-icon v-if="post.ch" size="18" color="green">mdi-check</v-icon>
                   <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>

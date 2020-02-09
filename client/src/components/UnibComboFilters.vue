@@ -149,7 +149,7 @@
     </v-row>
 
     <v-row justify="center" class="text-center">
-      <v-col cols="4" md="2" lg="2" xl="1" sm="3">
+      <v-col cols="6" md="2" lg="2" xl="1" sm="3">
         <v-select
           dense
           v-model="filter"
@@ -160,7 +160,7 @@
           @change="filterChange()"
         />
       </v-col>
-      <v-col cols="1" class="mx-xl-n12  mx-lg-n6">
+      <v-col cols="1" class="mx-xl-n12  mx-lg-n6 mx-9">
         <unibcomboplatform v-on:success="(success = true), $emit('success')" />
       </v-col>
     </v-row>
