@@ -101,6 +101,7 @@
                   validate-on-blur
                   :readonly="loading"
                   autocomplete="off"
+                  hint="Please enter base damage, not vorpal damage"
                 />
               </v-col>
             </v-row>

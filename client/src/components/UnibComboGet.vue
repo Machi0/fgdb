@@ -56,9 +56,9 @@
                 <v-col>
                   <div>Damage:</div>
                 </v-col>
-                <v-spacer />
+                <v-spacer class="mr-n12" />
                 <v-col class="text-end">
-                  <div>{{ post.damage }}</div>
+                  <div>{{ post.damage }} (~{{ Math.round(post.damage * 1.09699) }})</div>
                 </v-col>
               </v-row>
               <v-row>
