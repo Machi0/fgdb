@@ -408,11 +408,7 @@ export default {
     },
 
     meterInit() {
-      if (this.$route.query.mtr1 && this.$route.query.mtr2) {
-        this.meter = [this.$route.query.mtr1, this.$route.query.mtr2];
-      } else {
-        this.meter = [0, 200];
-      }
+      this.meter = [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200];
     },
   },
 };
