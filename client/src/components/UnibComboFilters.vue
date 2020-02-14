@@ -160,7 +160,7 @@
           @change="filterChange()"
         />
       </v-col>
-      <v-col cols="1" class="mx-xl-n12  mx-lg-n6 mx-9">
+      <v-col cols="1" class="mx-xl-n12  mx-lg-n5 mx-9">
         <unibcomboplatform v-on:success="(success = true), $emit('success')" />
       </v-col>
     </v-row>

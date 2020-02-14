@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="post" max-width="200">
       <template v-slot:activator="{ on }">
-        <v-icon color="secondary" v-on="on">mdi-plus-box</v-icon>
+        <v-icon color="secondary" v-on="on" size="33">mdi-video-plus</v-icon>
       </template>
       <v-card>
         <v-card-title>
