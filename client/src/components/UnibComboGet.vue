@@ -58,7 +58,7 @@
                 </v-col>
                 <v-spacer class="mr-n12" />
                 <v-col class="text-end">
-                  <div>{{ post.damage }} ({{ Math.round(post.damage * 1.097) }})</div>
+                  <div>{{ post.damage }}</div>
                 </v-col>
               </v-row>
               <v-row>
@@ -150,12 +150,12 @@
 
               <v-row v-if="'notation' in post" justify="center" class="">
                 <v-col class="text-center caption">
-                  <div>Notation: {{ post.notation }}</div>
+                  <div><u>Notation</u><br />{{ post.notation }}</div>
                 </v-col>
               </v-row>
               <v-row v-if="'desc' in post" justify="center" class="">
                 <v-col class="text-center caption">
-                  <div>Notes: {{ post.desc }}</div>
+                  <div><u>Notes</u><br />{{ post.desc }}</div>
                 </v-col>
               </v-row>
             </v-card-text>
