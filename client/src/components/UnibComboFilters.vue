@@ -39,14 +39,15 @@
 
     <v-row justify="center" class="mb-n8">
       <v-col md="5" xl="4" align-self="end">
-        <v-range-slider
+        <v-slider
           v-model="meter"
           color="secondary"
           label="Meter"
           max="200"
-          step="25"
+          min="0"
+          step="50"
           thumb-label
-          @end="meterChange()"
+          @change="meterChange()"
         />
       </v-col>
     </v-row>
@@ -247,14 +248,14 @@ export default {
       version: this.$route.query.ver || 'ST',
       pos: this.$route.query.pos || 'Midscreen',
       starter: this.$route.query.str || 'All',
-      meter: [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200],
+      meter: parseInt(this.$route.query.mtr) || 200,
       ch: JSON.parse(this.$route.query.ch || false),
       cs: JSON.parse(this.$route.query.cs || true),
       success: false,
       filter: this.$route.query.flt || 'Newest',
       eltnum: {
-        bullets: parseInt(this.$route.query.blt) || 13,
-        enh: parseInt(this.$route.query.enh) || 13,
+        bullets: 13,
+        enh: 13,
       },
       wagner: {
         sw: JSON.parse(this.$route.query.sw || true),
@@ -265,10 +266,16 @@ export default {
       },
 
       rules: {
-        required: value => !!value || 'Required',
+        required: value => Number.isInteger(parseInt(value)) || 'Required',
         limit: value => (value >= 0 && value <= 13) || '0-13',
       },
     };
+  },
+
+  created() {
+    this.setMeter();
+    this.setBullets();
+    this.setEnh();
   },
 
   watch: {
@@ -278,11 +285,11 @@ export default {
       this.pos = this.$route.query.pos || 'Midscreen';
       this.starter = this.$route.query.str || 'All';
       this.filter = this.$route.query.flt || 'Newest';
-      this.meter = [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200];
+      this.setMeter();
       this.ch = JSON.parse(this.$route.query.ch || false);
       this.cs = JSON.parse(this.$route.query.cs || false) || this.$route.query.cs == undefined;
-      this.eltnum.bullets = parseInt(this.$route.query.blt) || 13;
-      this.eltnum.enh = parseInt(this.$route.query.enh) || 13;
+      this.setBullets();
+      this.setEnh();
       this.wagner.sw =
         JSON.parse(this.$route.query.sw || false) || this.$route.query.sw == undefined;
       this.wagner.sh =
@@ -293,6 +300,36 @@ export default {
   },
 
   methods: {
+    setMeter() {
+      if (this.$route.query.mtr == 0) {
+        this.meter = 0;
+      } else if (this.$route.query.mtr) {
+        this.meter = this.$route.query.mtr;
+      } else {
+        this.meter = 200;
+      }
+    },
+
+    setBullets() {
+      if (this.$route.query.blt == 0) {
+        this.eltnum.bullets = 0;
+      } else if (this.$route.query.blt) {
+        this.eltnum.bullets = this.$route.query.blt;
+      } else {
+        this.eltnum.bullets = 13;
+      }
+    },
+
+    setEnh() {
+      if (this.$route.query.enh == 0) {
+        this.eltnum.enh = 0;
+      } else if (this.$route.query.enh) {
+        this.eltnum.enh = this.$route.query.enh;
+      } else {
+        this.eltnum.enh = 13;
+      }
+    },
+
     getStarters() {
       return this.starters[this.version][this.character];
     },
@@ -338,13 +375,7 @@ export default {
 
     meterChange() {
       this.$router.push({
-        query: Object.assign(
-          {},
-          this.$route.query,
-          { mtr1: this.meter[0] },
-          { mtr2: this.meter[1] },
-          { page: undefined }
-        ),
+        query: Object.assign({}, this.$route.query, { mtr: this.meter }, { page: undefined }),
       });
     },
 

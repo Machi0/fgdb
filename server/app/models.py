@@ -162,9 +162,8 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         else:
             query = query.filter_by(ver='ST')
         
-        if request.args.get('mtr1') is not None and request.args.get('mtr2') is not None:
-            query = query.filter(self.meter>=int(request.args.get('mtr1')))
-            query = query.filter(self.meter<=int(request.args.get('mtr2')))
+        if request.args.get('mtr'):
+            query = query.filter(self.meter<=int(request.args.get('mtr')))
         
         if request.args.get('pos') is not None:
             query = query.filter_by(pos=request.args.get('pos'))
