@@ -248,7 +248,7 @@ export default {
       version: this.$route.query.ver || 'ST',
       pos: this.$route.query.pos || 'Midscreen',
       starter: this.$route.query.str || 'All',
-      meter: parseInt(this.$route.query.mtr) || 200,
+      meter: 200,
       ch: JSON.parse(this.$route.query.ch || false),
       cs: JSON.parse(this.$route.query.cs || true),
       success: false,
