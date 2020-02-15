@@ -247,7 +247,7 @@ export default {
       version: this.$route.query.ver || 'ST',
       pos: this.$route.query.pos || 'Midscreen',
       starter: this.$route.query.str || 'All',
-      meter: [0, 200],
+      meter: [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200],
       ch: JSON.parse(this.$route.query.ch || false),
       cs: JSON.parse(this.$route.query.cs || true),
       success: false,
@@ -271,10 +271,6 @@ export default {
     };
   },
 
-  created() {
-    this.meterInit();
-  },
-
   watch: {
     $route(to, from) {
       this.character = this.$route.query.char || 'All';
@@ -282,7 +278,9 @@ export default {
       this.pos = this.$route.query.pos || 'Midscreen';
       this.starter = this.$route.query.str || 'All';
       this.filter = this.$route.query.flt || 'Newest';
-      this.meterInit();
+      console.log(this.meter);
+      this.meter = [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200];
+      console.log(this.meter);
       this.ch = JSON.parse(this.$route.query.ch || false);
       this.cs = JSON.parse(this.$route.query.cs || false) || this.$route.query.cs == undefined;
       this.eltnum.bullets = parseInt(this.$route.query.blt) || 13;
@@ -341,10 +339,15 @@ export default {
     },
 
     meterChange() {
-      var a = Object.assign({}, this.$route.query, { mtr1: this.meter[0] });
-      a = Object.assign({}, a, { mtr2: this.meter[1] });
-      a = Object.assign({}, a, { page: undefined });
-      this.$router.push({ query: a }).catch(err => {});
+      this.$router.push({
+        query: Object.assign(
+          {},
+          this.$route.query,
+          { mtr1: this.meter[0] },
+          { mtr2: this.meter[1] },
+          { page: undefined }
+        ),
+      });
     },
 
     chChange() {
@@ -405,10 +408,6 @@ export default {
       this.$router.push({
         query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }, { page: undefined }),
       });
-    },
-
-    meterInit() {
-      this.meter = [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200];
     },
   },
 };
