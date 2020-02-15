@@ -278,9 +278,7 @@ export default {
       this.pos = this.$route.query.pos || 'Midscreen';
       this.starter = this.$route.query.str || 'All';
       this.filter = this.$route.query.flt || 'Newest';
-      console.log(this.meter);
       this.meter = [this.$route.query.mtr1 || 0, this.$route.query.mtr2 || 200];
-      console.log(this.meter);
       this.ch = JSON.parse(this.$route.query.ch || false);
       this.cs = JSON.parse(this.$route.query.cs || false) || this.$route.query.cs == undefined;
       this.eltnum.bullets = parseInt(this.$route.query.blt) || 13;
