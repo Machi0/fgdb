@@ -29,6 +29,8 @@ def post_combo():
         return bad_request("Missing Wagner fields")
     elif data['character'] == 'Chaos' and 'azhi' not in data:
         return bad_request("Missing Chaos fields")
+    elif data['character'] == 'Londrekia' and 'iInstall' not in data:
+        return bad_request("Missing Londrekia fields")
     
     if ('tw' not in data and 'yt' not in data) or ('tw' in data and 'yt' in data):
         return bad_request("Missing URL")

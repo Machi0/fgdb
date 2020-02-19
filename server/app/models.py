@@ -69,7 +69,7 @@ class Admin(db.Model):
             'character', 'ver', 'damage', 'cs', 'ch',
             'starter', 'meter', 'pos', 'yt', 'tw', 'bullets',
             'enh', 'wSword', 'wShield', 'azhi', 'notation', 'desc',
-            'flag' 
+            'flag', 'iInstall' 
         ]
 
         for field in fields:
@@ -97,6 +97,7 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
     wSword = db.Column(db.Boolean, index=True)
     wShield = db.Column(db.Boolean, index=True)
     azhi = db.Column(db.Boolean, index=True)
+    iInstall = db.Column(db.Boolean, index=True)
 
     notation = db.Column(db.String(140))
     desc = db.Column(db.String(140))
@@ -124,6 +125,8 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
             data['wShield'] = self.wShield
         elif self.character == "Chaos":
             data['azhi'] = self.azhi
+        elif self.character == "Londrekia":
+            data['iInstall'] = self.iInstall
 
         if self.yt != None:
             data['yt'] = self.yt
@@ -141,7 +144,8 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         fields = [
             'character', 'ver', 'damage', 'cs', 'ch',
             'starter', 'meter', 'pos', 'yt', 'tw', 'bullets',
-            'enh', 'wSword', 'wShield', 'azhi', 'notation', 'desc' 
+            'enh', 'wSword', 'wShield', 'azhi', 'notation', 'desc',
+            'iInstall' 
         ]
 
         for field in fields:
@@ -157,10 +161,10 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
         if request.args.get('str') is not None and request.args.get('str') != 'All':
             query = query.filter_by(starter=request.args.get('str'))
 
-        if request.args.get('ver') is not None and request.args.get('ver') == 'CLR':
+        if request.args.get('ver') is not None and request.args.get('ver') == 'ST':
             query = query.filter_by(ver=request.args.get('ver'))
         else:
-            query = query.filter_by(ver='ST')
+            query = query.filter_by(ver='CLR')
         
         if request.args.get('mtr'):
             query = query.filter(self.meter<=int(request.args.get('mtr')))
@@ -198,6 +202,10 @@ class UnibCombos(PaginatedAPIMixin, db.Model):
 
         if request.args.get('flt') == 'Damage':
             query = query.order_by(self.damage.desc())
+
+        if request.args.get('ice') is not None and request.args.get('char') == 'Londrekia' \
+           and request.args.get('ice') == 'false':
+            query = query.filter_by(iInstall=False)
         
         query = query.order_by(self.id.desc())
 
