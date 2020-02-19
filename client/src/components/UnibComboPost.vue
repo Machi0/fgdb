@@ -229,6 +229,20 @@
               </v-col>
             </v-row>
 
+            <v-row v-if="character == 'Londrekia'" justify="center" class="mt-n10">
+              <v-col md="3" class="text-center">
+                <v-row justify="center">
+                  <v-checkbox
+                    v-model="londrekia.ice"
+                    label="Ice Install"
+                    color="secondary"
+                    flat
+                    :readonly="loading"
+                  />
+                </v-row>
+              </v-col>
+            </v-row>
+
             <v-row class="mt-n8">
               <v-col>
                 <v-text-field
@@ -304,7 +318,7 @@ export default {
       ytlink: '',
 
       character: '',
-      version: 'ST',
+      version: 'CLR',
       starter: '',
       meter: '',
       cs: false,
@@ -389,6 +403,10 @@ export default {
         azhi: false,
       },
 
+      londrekia: {
+        ice: false,
+      },
+
       rules: {
         required: value => !!value || 'Required Field',
         limit: value => (value >= 0 && value <= 13) || '0-13',
@@ -445,6 +463,8 @@ export default {
         payload.wShield = this.wagner.sh;
       } else if (this.character === 'Chaos') {
         payload.azhi = this.chaos.azhi;
+      } else if (this.character === 'Londrekia') {
+        payload.iInstall = this.londrekia.ice;
       }
 
       if (!!this.notation) {
@@ -494,12 +514,13 @@ export default {
 
     reset: function() {
       this.$refs.form.reset();
-      this.version = 'ST';
+      this.version = 'CLR';
       this.cs = false;
       this.ch = false;
       this.wagner.sw = false;
       this.wagner.sh = false;
       this.chaos.azhi = false;
+      this.londrekia.ice = false;
     },
   },
 };

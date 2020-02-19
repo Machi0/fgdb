@@ -149,6 +149,20 @@
       </v-col>
     </v-row>
 
+    <v-row v-if="character == 'Londrekia'" justify="center" class="mt-n8">
+      <v-col md="2" class="text-center">
+        <v-row justify="center">
+          <v-checkbox
+            v-model="londrekia.ice"
+            label="Ice Install"
+            color="secondary"
+            flat
+            @change="iceChange()"
+          />
+        </v-row>
+      </v-col>
+    </v-row>
+
     <v-row justify="center" class="text-center">
       <v-col cols="6" md="2" lg="2" xl="1" sm="3">
         <v-select
@@ -245,7 +259,7 @@ export default {
       starters: unibstarters.data(),
 
       character: this.$route.query.char || 'All',
-      version: this.$route.query.ver || 'ST',
+      version: this.$route.query.ver || 'CLR',
       pos: this.$route.query.pos || 'Midscreen',
       starter: this.$route.query.str || 'All',
       meter: 200,
@@ -264,6 +278,9 @@ export default {
       chaos: {
         azhi: JSON.parse(this.$route.query.az || true),
       },
+      londrekia: {
+        ice: JSON.parse(this.$route.ice || true),
+      },
 
       rules: {
         required: value => Number.isInteger(parseInt(value)) || 'Required',
@@ -281,7 +298,7 @@ export default {
   watch: {
     $route(to, from) {
       this.character = this.$route.query.char || 'All';
-      this.version = this.$route.query.ver || 'ST';
+      this.version = this.$route.query.ver || 'CLR';
       this.pos = this.$route.query.pos || 'Midscreen';
       this.starter = this.$route.query.str || 'All';
       this.filter = this.$route.query.flt || 'Newest';
@@ -296,6 +313,8 @@ export default {
         JSON.parse(this.$route.query.sh || false) || this.$route.query.sh == undefined;
       this.chaos.azhi =
         JSON.parse(this.$route.query.az || false) || this.$route.query.az == undefined;
+      this.londrekia.ice =
+        JSON.parse(this.$route.query.ice || false) || this.$route.query.ice == undefined;
     },
   },
 
@@ -436,6 +455,17 @@ export default {
     azhiChange() {
       this.$router.push({
         query: Object.assign({}, this.$route.query, { az: this.chaos.azhi }, { page: undefined }),
+      });
+    },
+
+    iceChange() {
+      this.$router.push({
+        query: Object.assign(
+          {},
+          this.$route.query,
+          { ice: this.londrekia.ice },
+          { page: undefined }
+        ),
       });
     },
   },
