@@ -154,7 +154,7 @@
         <v-row justify="center">
           <v-checkbox
             v-model="londrekia.ice"
-            label="Ice Install"
+            label="Frost"
             color="secondary"
             flat
             @change="iceChange()"
@@ -169,7 +169,7 @@
           dense
           v-model="filter"
           :items="filters"
-          label="Filter By"
+          label="Sort By"
           item-color="secondary"
           color="secondary"
           @change="filterChange()"

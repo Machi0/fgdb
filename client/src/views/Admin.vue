@@ -72,6 +72,15 @@
             <v-card-text>
               <v-row>
                 <v-col>
+                  <div>Version:</div>
+                </v-col>
+                <v-spacer />
+                <v-col class="text-end">
+                  <div>{{ post.ver }}</div>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
                   <div>Starter:</div>
                 </v-col>
                 <v-spacer />
@@ -171,6 +180,16 @@
                 <v-spacer />
                 <v-col class="text-end">
                   <v-icon v-if="post.azhi" size="18" color="green">mdi-check</v-icon>
+                  <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
+                </v-col>
+              </v-row>
+              <v-row v-if="'iInstall' in post">
+                <v-col>
+                  <div>Frost:</div>
+                </v-col>
+                <v-spacer />
+                <v-col class="text-end">
+                  <v-icon v-if="post.iInstall" size="18" color="green">mdi-check</v-icon>
                   <v-icon v-else size="16" color="red darken-1">mdi-close</v-icon>
                 </v-col>
               </v-row>

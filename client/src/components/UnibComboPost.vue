@@ -234,7 +234,7 @@
                 <v-row justify="center">
                   <v-checkbox
                     v-model="londrekia.ice"
-                    label="Ice Install"
+                    label="Frost"
                     color="secondary"
                     flat
                     :readonly="loading"
