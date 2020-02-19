@@ -410,7 +410,7 @@ export default {
       rules: {
         required: value => !!value || 'Required Field',
         limit: value => (value >= 0 && value <= 13) || '0-13',
-        ratio: value => value <= this.eltnum.bullets || 'More enhanced than bullets',
+        ratio: value => value <= parseInt(this.eltnum.bullets) || 'More enhanced than bullets',
         meter: value => (value >= 0 && value <= 200) || 'Must be 0-200',
 
         twcheck: value =>

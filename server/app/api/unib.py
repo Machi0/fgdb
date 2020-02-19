@@ -9,7 +9,7 @@ from app import limiter
 @limiter.exempt
 def get_combo():
     page = request.args.get('page', 1, type=int)
-    per_page = min(request.args.get('per_page', 24, type=int), 100)
+    per_page = min(request.args.get('per_page', 12, type=int), 100)
     query = UnibCombos.get_query(UnibCombos)
     data = UnibCombos.to_collection_dict(query, page, per_page, 'api.unib.get_combo')
     return jsonify(data)
