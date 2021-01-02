@@ -8,7 +8,7 @@ GrdBreak is a combo database SPA for the game _Under Night In-Birth_ that uses V
 
 ## Usage
 
-To run the server:
+To run a local server:
 
 ```bash
 >> cd .../GrdBreak-master/server
@@ -18,7 +18,7 @@ To run the server:
 >> flask run
 ```
 
-To run the client:
+To run a local client:
 
 ```bash
 >> cd .../GrdBreak-master/client
